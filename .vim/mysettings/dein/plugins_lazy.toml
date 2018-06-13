@@ -1,0 +1,28 @@
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_i = 1
+hook_source = '''
+	let g:deoplete#enable_at_startup = 1
+'''
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+on_ft = 'toml'
+hook_source = '''
+	if !exists('g:context_filetype#filetypes')
+		let g:context_filetype#filetypes = {}
+	endif
+	let g:context_filetype#filetypes['toml'] = [
+		\ {'filetype':'vim', 'start':'^\s*hook_\(add\|source\|post_source\)\s*=\s*'.'""'.'"', 'end':'""'.'"'},
+		\ {'filetype':'vim', 'start':'^\s*hook_\(add\|source\|post_source\)\s*=\s*'."''"."'", 'end':"''"."'"},
+		\ ]
+'''
+
