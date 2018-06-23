@@ -1,0 +1,60 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+if = ''' ! has('nvim') '''
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+if = ''' ! has('nvim') '''
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
+repo = 'nanotech/jellybeans.vim'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+source ~/.vim/rc/plugins/lightline.rc.vim
+'''
+
+[[plugins]]
+repo = 'majutsushi/tagbar'
+hook_add = '''
+	nnoremap <silent> <Leader>f :<C-u>Tagbar<CR>
+'''
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+	nnoremap <silent> <Leader>n :<C-u>NERDTreeToggle<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/vim-vcs'
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+	let g:indent_guides_enable_on_vim_startup = 1
+'''
+
+[[plugins]]
+repo = 'tyru/caw.vim'
+hook_add = '''
+	nmap <Leader>c <Plug>(caw:zeropos:comment)
+	vmap <Leader>c <Plug>(caw:zeropos:comment)
+	nmap <Leader>C <Plug>(caw:zeropos:uncomment)
+	vmap <Leader>C <Plug>(caw:zeropos:uncomment)
+'''
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
+hook_add = '''
+source ~/.vim/rc/plugins/lexima.rc.vim
+'''
+
