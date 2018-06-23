@@ -1,2 +1,2 @@
-runtime! mysettings/init/*.vim
-runtime! mysettings/dein/*.vim
+runtime! userautoload/init/*.vim
+runtime! userautoload/dein/*.vim
