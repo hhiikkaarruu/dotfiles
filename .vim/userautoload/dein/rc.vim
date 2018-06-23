@@ -16,8 +16,8 @@ let g:dein#enable_notification = 1
 
 if dein#load_state(s:dein_path)
 	call dein#begin(s:dein_path)
-	call dein#load_toml('~/.vim/mysettings/dein/plugins.toml', {'lazy': 0})
-	call dein#load_toml('~/.vim/mysettings/dein/plugins_lazy.toml', {'lazy': 1})
+	call dein#load_toml('~/.vim/userautoload/dein/plugins.toml', {'lazy': 0})
+	call dein#load_toml('~/.vim/userautoload/dein/plugins_lazy.toml', {'lazy': 1})
 	call dein#end()
 	call dein#save_state()
 endif
