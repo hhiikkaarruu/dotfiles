@@ -1,5 +1,6 @@
 " ,をリーダーに設定
-let mapleader = ","
+let mapleader = ','
+"let maplocalleader = '\'
 noremap \ ,
 " USキーボード用
 nnoremap ; :
@@ -26,8 +27,19 @@ nnoremap <silent> <C-n> :<C-u>cn<CR>
 nnoremap <silent> <C-p> :<C-u>cp<CR>
 " grep love
 nnoremap gr :<C-u>grep 
-" タブ関連
+" 今開いているタブだけに
 nnoremap <silent> to :<C-u>tabo<CR>
+" タブを閉じて左のタブにフォーカス
+"nnoremap <silent> tc :<C-u>tabc<CR>:tabp<CR>
+nnoremap <silent> tc :<C-u>call CloseTab()<CR>
+function! CloseTab()
+	let current_tabno = tabpagenr()
+	let max_tabno = tabpagenr('$')
+	exec 'tabc'
+	if current_tabno != max_tabno
+		exec 'tabp'
+	endif
+endfunction
 " タブ複製
 nnoremap <Leader>t <C-w>v<C-w>T
 " tab最高
@@ -35,11 +47,15 @@ nnoremap tf :<C-u>tabf
 " タブ移動マッピング
 nnoremap <silent> tl :<C-u>tabn<CR>
 nnoremap <silent> th :<C-u>tabp<CR>
+" gfをタブで開く
+nnoremap gf <C-w>gf
+nnoremap gF <C-w>gF
 " <cword>grep結果をタブで開く
-nnoremap <silent> gc <C-w>v<C-w>T:<C-u>grep <C-R>=expand('<cword>')<CR><CR>
-" タブを閉じて左にフォーカス コメント化理由：右端のタブを閉じたときに無駄に左に行っちゃう
-" nnoremap <silent> tc :<C-u>tabc<CR>:<C-u>tabp<CR>
+nnoremap <silent> gc <C-w>v<C-w>T:<C-u>grep -rn <C-R>=expand('<cword>')<CR> * <CR>
+" タグジャンプ結果をタブで開く
+nnoremap <silent> <C-]> :<C-u>tab stj <C-R>=expand('<cword>')<CR><CR>
 " ウィンドウ関連
+nnoremap s  <Nop>
 " ウィンドウ移動をマッピング
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -55,5 +71,36 @@ nnoremap s- <C-w>-
 nnoremap <silent> ss :<C-u>split<CR>
 nnoremap <silent> sv :<C-u>vsplit<CR>
 " 同じ高さのインデントへ移動
-nnoremap <silent> { k:<C-u>call search("^". matchstr(getline(line("." + 1)), '\(\s*\)') ."\\S")<CR>^
-nnoremap <silent> } :<C-u>call search("^". matchstr(getline(line(".")), '\(\s*\)') ."\\S")<CR>^
+" nnoremap <silent> { :<C-u>call search("^". matchstr(getline(line("." + 1)), '\(\s*\)') ."\\S", 'b')<CR>^
+" nnoremap <silent> } :<C-u>call search("^". matchstr(getline(line(".")),     '\(\s*\)') ."\\S")<CR>^
+nnoremap <silent> { :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>
+nnoremap <silent> } :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>
+" 検索結果を画面中央に
+nnoremap n nzz
+nnoremap N Nzz
+" 単語の検索を楽に
+nnoremap <Leader>/ /\<\><Left><Left>
+
+" nnoremap <silent> K :<C-u>vsplit<CR>:<C-u>Man <cword><CR>
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+" terminalのEsc
+tnoremap <silent> <Esc> <C-\><C-n>
+tnoremap <silent> jj <C-\><C-n>
+tnoremap <silent> <C-j> <C-\><C-n><C-w>j
+tnoremap <silent> <C-k> <C-\><C-n><C-w>k
+tnoremap <silent> <C-h> <C-\><C-n><C-w>h
+tnoremap <silent> <C-l> <C-\><C-n><C-w>l
+" terminalショートカット
+nnoremap <silent> st <C-w>s:<C-u>terminal<CR>i
+" バッファやるぞ！！
+nnoremap <silent> <Leader>b :<C-u>bnext<CR>
+nnoremap <silent> <Leader>B :<C-u>bprev<CR>
+" qでAll OK
+nnoremap <silent> <Leader>q :<C-u>call CloseDisp()<CR>
+function! CloseDisp()
+	exec 'q'
+endfunction
+

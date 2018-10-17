@@ -5,7 +5,7 @@ let g:lightline = {
 			\ 	'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename', 'currenttag', 'currentbranch' ] ]
 			\ },
 			\ 'component': {
-			\   'lineinfo': ' %3l:%-2v',
+			\   'lineinfo': ' %3l:%-2v',
 			\ },
 			\ 'component_function': {
 			\ 'modified': 'LightlineModified',
@@ -19,6 +19,8 @@ let g:lightline = {
 			\ 'fileencoding': 'LightlineFileencoding',
 			\ 'mode': 'LightlineMode'
 			\ },
+			\ 'separator': { 'left': "", 'right': ""},
+			\ 'subseparator': { 'left': "", 'right': ""}
 			\ }
 
 function! LightlineModified()
@@ -26,7 +28,7 @@ function! LightlineModified()
 endfunction
 
 function! LightlineReadonly()
-	return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '(T^T)' : ''
+	return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '' : ''
 endfunction
 
 function! LightlineFilename()
@@ -43,7 +45,7 @@ function! LightlineCurrenttag()
 endfunction
 
 function! LightlineCurrentbranch()
-		return vcs#info("<%s> %r:%b", "<%s> %r:%b")
+		return vcs#info("<%s> %r:%b", "<%s> %r:%b")
 endfunction
 
 function! LightlineFugitive()
