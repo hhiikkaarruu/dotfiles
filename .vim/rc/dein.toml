@@ -10,22 +10,35 @@ repo = 'roxma/vim-hug-neovim-rpc'
 if = ''' ! has('nvim') '''
 
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
-
-[[plugins]]
 repo = 'nanotech/jellybeans.vim'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-source ~/.vim/rc/plugins/lightline.rc.vim
+	if has('nvim')
+		source ~/.vim/rc/plugins/lightline.rc.vim
+	else
+		source ~/.vim/rc/plugins/lightline_powerline.rc.vim
+	endif
 '''
+
+# [[plugins]]
+# repo = 'vim-airline/vim-airline'
+# hook_add = '''
+# 	if ! has('nvim')
+# 		let g:airline_powerline_fonts = 1
+# 	endif
+# '''
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
 hook_add = '''
-	nnoremap <silent> <Leader>f :<C-u>Tagbar<CR>
+	if has('nvim')
+		let g:tagbar_iconchars = ['+', '-']
+	endif
+	let g:tagbar_sort = 0
+
+	nnoremap <silent> <Leader>f :<C-u>TagbarToggle<CR>
 '''
 
 [[plugins]]
@@ -33,15 +46,25 @@ repo = 'scrooloose/nerdtree'
 hook_add = '''
 	nnoremap <silent> <Leader>n :<C-u>NERDTreeToggle<CR>
 '''
+# TODO
+# [[plugins]]
+# repo = 'Shougo/vimfiler.vim'
+# [[plugins]]
+# repo = 'Shougo/defx.vim'
 
 [[plugins]]
 repo = 'Shougo/vim-vcs'
 
-[[plugins]]
-repo = 'nathanaelkane/vim-indent-guides'
-hook_add = '''
-	let g:indent_guides_enable_on_vim_startup = 1
-'''
+# [[plugins]]
+# repo = 'nathanaelkane/vim-indent-guides'
+# hook_add = '''
+# 	let g:indent_guides_enable_on_vim_startup = 1
+# '''
+#  vim-indent-guidesから乗り換え
+#  ようかと思ったけどsetでできるでしょって言われた。
+# [[plugins]]
+# repo = 'Yggdroot/indentLine'
+
 
 [[plugins]]
 repo = 'tyru/caw.vim'
@@ -53,8 +76,16 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'cohama/lexima.vim'
+repo = 'KabbAmine/zeavim.vim'
 hook_add = '''
-source ~/.vim/rc/plugins/lexima.rc.vim
+source ~/.vim/rc/plugins/zeavim.rc.vim
 '''
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'yuratomo/w3m.vim'
+
+# TODO:neco
 
