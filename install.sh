@@ -18,5 +18,6 @@ do
 done
 
 ln -snfv "${DOTPATH}/.vimrc" "${DOTPATH}/.vim/init.vim"
+ln -snfv "${DOTPATH}/.vim" "${HOME}/.config/nvim"
 
 echo 'installation has been complated. ✔︎'
