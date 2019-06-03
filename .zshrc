@@ -72,9 +72,11 @@ if [ ! -f ~/.zshrc.zwc ] || [ ~/.dotfiles/.zshrc -nt ~/.zshrc.zwc ]; then
 	zcompile ~/.zshrc
 fi
 
-# コマンドカラー表示
-. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# blueが見づらすぎるためnone化
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=none'
-ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=none'
+# exa:dateの青が見づらいのでカラー解除
+export EXA_COLORS="da=0"
 
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+. ~/.fzfrc &> /dev/null
+. ~/.zshrc_local &> /dev/null
+
+eval "$(pyenv init -)"
