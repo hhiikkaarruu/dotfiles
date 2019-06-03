@@ -1,3 +1,6 @@
+filetype off
+filetype plugin indent off
+
 runtime! rc/basic.rc.vim
 runtime! rc/mapping.rc.vim
 runtime! rc/util.rc.vim

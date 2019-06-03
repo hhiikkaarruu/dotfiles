@@ -9,7 +9,6 @@ export EDITOR=nvim
 path=(
 	${HOME}/bin(N-/)
 	${HOME}/.local/bin(N-/)
-	${HOME}/.cargo/bin(N-/)
 	/usr/local/bin(N-/)
 	/usr/local/sbin(N-/)
 	/usr/bin(N-/)
@@ -23,19 +22,21 @@ path=(
 cdpath=(
 )
 
-# /etc/profileを読み込まない
-# setopt no_global_rcs
-
 # zshenvに書くとvimでも使える。set shell=/usr/bin/zsh
 # aliases
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias ls='exa -F'
+alias ll='exa -FlBghm -snew'
 alias nv='nvim'
-alias top='htop'
+alias top='htop -d 10'
 alias df='dfc'
-
-# global aliases
-alias -g L='| less'
-
+alias cat='bat'
+alias ping='prettyping'
+alias du='ncdu --color dark -rr'
+# alias rgは~/.ripgreprcに記述
+less_with_unbuffer() {
+	unbuffer "$@" |& less -SR
+}
+alias ub=less_with_unbuffer

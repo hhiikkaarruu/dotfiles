@@ -1,10 +1,10 @@
 " ,をリーダーに設定
 let mapleader = ','
-"let maplocalleader = '\'
 noremap \ ,
-" USキーボード用
 nnoremap ; :
 nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 " 思い立ったらすぐvimrc
 nnoremap <silent> <F2> :<C-u>tabf	$MYVIMRC<CR>
 nnoremap <silent> <F3> :<C-u>source	$MYVIMRC<CR>
@@ -30,8 +30,7 @@ nnoremap gr :<C-u>grep
 " 今開いているタブだけに
 nnoremap <silent> to :<C-u>tabo<CR>
 " タブを閉じて左のタブにフォーカス
-"nnoremap <silent> tc :<C-u>tabc<CR>:tabp<CR>
-nnoremap <silent> tc :<C-u>call CloseTab()<CR>
+nnoremap <silent> tr :<C-u>call CloseTab()<CR>
 function! CloseTab()
 	let current_tabno = tabpagenr()
 	let max_tabno = tabpagenr('$')
@@ -41,7 +40,7 @@ function! CloseTab()
 	endif
 endfunction
 " タブ複製
-nnoremap <Leader>t <C-w>v<C-w>T
+nnoremap tt <C-w>v<C-w>T
 " tab最高
 nnoremap tf :<C-u>tabf 
 " タブ移動マッピング
@@ -71,8 +70,6 @@ nnoremap s- <C-w>-
 nnoremap <silent> ss :<C-u>split<CR>
 nnoremap <silent> sv :<C-u>vsplit<CR>
 " 同じ高さのインデントへ移動
-" nnoremap <silent> { :<C-u>call search("^". matchstr(getline(line("." + 1)), '\(\s*\)') ."\\S", 'b')<CR>^
-" nnoremap <silent> } :<C-u>call search("^". matchstr(getline(line(".")),     '\(\s*\)') ."\\S")<CR>^
 nnoremap <silent> { :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>
 nnoremap <silent> } :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>
 " 検索結果を画面中央に
@@ -80,8 +77,6 @@ nnoremap n nzz
 nnoremap N Nzz
 " 単語の検索を楽に
 nnoremap <Leader>/ /\<\><Left><Left>
-
-" nnoremap <silent> K :<C-u>vsplit<CR>:<C-u>Man <cword><CR>
 nnoremap j gj
 nnoremap k gk
 vnoremap j gj
@@ -95,9 +90,9 @@ tnoremap <silent> <C-h> <C-\><C-n><C-w>h
 tnoremap <silent> <C-l> <C-\><C-n><C-w>l
 " terminalショートカット
 nnoremap <silent> st <C-w>s:<C-u>terminal<CR>i
-" バッファやるぞ！！
-nnoremap <silent> <Leader>b :<C-u>bnext<CR>
-nnoremap <silent> <Leader>B :<C-u>bprev<CR>
+" バッファやるぞー
+nnoremap <silent> <C-n> :<C-u>bnext<CR>
+nnoremap <silent> <C-p> :<C-u>bprev<CR>
 " qでAll OK
 nnoremap <silent> <Leader>q :<C-u>call CloseDisp()<CR>
 function! CloseDisp()

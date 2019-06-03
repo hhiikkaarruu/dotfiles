@@ -1,14 +1,14 @@
-let g:deoplete#enable_at_startup = 1
 inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-g> deoplete#refresh()
 inoremap <expr><C-e> deoplete#cancel_popup()
 inoremap <expr><C-f> deoplete#complete_common_string()
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-  return deoplete#cancel_popup() . "\<CR>"
-endfunction
-inoremap <expr><C-k> pumvisible() ? deoplete#close_popup() : ""
+" leximaの<CR>が効かなくなる。
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function() abort
+"  return deoplete#cancel_popup() . "\<CR>"
+"endfunction
+inoremap <expr> <C-d> pumvisible() ? deoplete#close_popup() : ""
 
 call deoplete#custom#source('_', 'matchers',
 			\ ['matcher_fuzzy', 'matcher_length'])

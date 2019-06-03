@@ -9,7 +9,7 @@ if has('persistent_undo')
 	set undodir=~/.vim/undo
 	set undofile
 endif
-" grepをackに変更
+" grepをripgrepに変更
 if executable('/usr/bin/rg')
 	set grepprg=rg\ --vimgrep\ --no-heading\ $*
 	set grepformat=%f:%l:%c:%m,%f:%l:%m
@@ -37,14 +37,9 @@ endfunction
 command! -bar -nargs=+ -complete=file VimDiff call s:vimdiff_in_newtab(<f-args>)
 filetype indent plugin on
 
-" neovim終了後もカーソルがneovim仕様になるのを防止 " 直らない。
-" autocmd VimLeave * set guicursor=a:block-blinkon0
 " ウィンドウを移動したときにterminal-jobモードに
 if has('nvim')
 	autocmd WinEnter * if &buftype ==# 'terminal' | startinsert | endif
 else
 	autocmd WinEnter * if &buftype ==# 'terminal' | normal i | endif
 endif
-" seqファイルをsyntax
-au BufRead,BufNewFile *.seq set filetype=seq
-
