@@ -1,6 +1,6 @@
 set nocompatible
-set ambiwidth=double				" ASCII文字の２倍の幅を使う 
-"set ambiwidth=single				" doubleだとpowerline使えない
+"set ambiwidth=double				" ASCII文字の２倍の幅を使う 
+set ambiwidth=single				" doubleだとpowerline使えない
 set noexpandtab						" tabを挿入する(スペースに置き換えない)
 set tabstop=4						" タブを４文字分にする
 set shiftwidth=4					" 自動インデントで挿入されるタブを４文字分にする
@@ -54,4 +54,10 @@ set hidden							" 未保存でのバッファ切替有効
 " t :ファイル関連のメッセージが長い時先頭を切り詰める
 " I :vimの開始時に挨拶メッセージを表示しない
 "set shortmess=atI
-
+"set shortmess=aoOtI
+if has('nvim')
+       set inccommand=split
+endif
+set cmdheight=2                                        " 邪魔だけどこれでgrepで聞かれない。
+set splitright                                         " quickrunの結果表示位置変更
+set splitbelow                                         " quickrunの結果表示位置変更
