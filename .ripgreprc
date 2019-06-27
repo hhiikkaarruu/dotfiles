@@ -1,0 +1,7 @@
+# exclude                                                                                                                                                                                                     
+-S
+--no-heading 
+--glob
+!*.{c.txt,met}
+--glob
+!*.{gcno,gcda,gcov}
