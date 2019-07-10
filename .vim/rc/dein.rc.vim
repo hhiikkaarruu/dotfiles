@@ -11,7 +11,6 @@ endif
 
 execute 'set runtimepath^=' . s:dein_repo_path
 
-" let g:dein#install_progress_type = 'title'
 let g:dein#enable_notification = 1
 
 if dein#load_state(s:dein_path)
@@ -22,9 +21,8 @@ if dein#load_state(s:dein_path)
 	call dein#save_state()
 endif
 
-colorscheme jellybeans
-syntax enable
-filetype plugin indent on
+set background=dark
+colorscheme hybrid
 
 if dein#check_install()
 	call dein#install()

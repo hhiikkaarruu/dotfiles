@@ -43,18 +43,39 @@ hook_add = '''
 	nnoremap [Denite] <Nop>
 	nmap <Space> [Denite]
 
-	nnoremap [Denite]f :<C-u>Denite -mode=normal file_rec -path=
-	nnoremap <silent> [Denite]g :<C-u>Denite -buffer-name=search -no-empty -mode=normal grep<CR>
-	nnoremap <silent> [Denite]c :<C-u>DeniteCursorWord -buffer-name=search -no-empty -mode=normal grep<CR>
+	nnoremap [Denite]f :<C-u>Denite file_rec -path=
+	nnoremap <silent> [Denite]g :<C-u>Denite -buffer-name=search -no-empty grep<CR>
+	nnoremap <silent> [Denite]c :<C-u>DeniteCursorWord -buffer-name=search -no-empty grep<CR>
 	nnoremap <silent> [Denite]h :<C-u>Denite -buffer-name=search -resume<CR>
 	nnoremap <silent> [Denite]n :<C-u>Denite -buffer-name=search -resume -select=+1 -immediately<CR>
 	nnoremap <silent> [Denite]p :<C-u>Denite -buffer-name=search -resume -select=-1 -immediately<CR>
 	nnoremap <silent> [Denite]/ :<C-u>Denite -buffer-name=search -auto-highlight line<CR>
-	nnoremap <silent> [Denite]* :<C-u>DeniteCursorWord -buffer-name=search -auto-highlight -mode=normal line<CR>
+	nnoremap <silent> [Denite]* :<C-u>DeniteCursorWord -buffer-name=search -auto-highlight line<CR>
 	nnoremap <silent> [Denite]r :<C-u>Denite -buffer-name=register register neoyank<CR>
 	xnoremap <silent> [Denite]r :<C-u>Denite -default-action=replace -buffer-name=register register neoyank<CR>
 	nnoremap <silent> [Denite]b :<C-u>Denite buffer<CR>
 	nnoremap <silent> [Denite]t :<C-U>Denite filetype<CR>
+'''
+
+[plugins.ftplugin]
+denite = '''
+	" Define mappings
+	nnoremap <silent><buffer><expr> <CR>
+	\ denite#do_map('do_action')
+	nnoremap <silent><buffer><expr> a
+	\ denite#do_map('choose_action')
+	nnoremap <silent><buffer><expr> d
+	\ denite#do_map('do_action', 'delete')
+	nnoremap <silent><buffer><expr> p
+	\ denite#do_map('do_action', 'preview')
+	nnoremap <silent><buffer><expr> q
+	\ denite#do_map('quit')
+	nnoremap <silent><buffer><expr> '
+	\ denite#do_map('quick_move')
+	nnoremap <silent><buffer><expr> i
+	\ denite#do_map('open_filter_buffer')
+	nnoremap <silent><buffer><expr> <Space>
+	\ denite#do_map('toggle_select').'j'
 '''
 
 [[plugins]]

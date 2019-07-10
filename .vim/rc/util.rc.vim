@@ -2,8 +2,6 @@
 set cursorcolumn
 set cursorline
 highlight clear CursorLine
-" 常に開いているファイルと同じディレクトリをカレントディレクトリにする
-" au BufEnter * execute ":lcd" .expand("%:p:h") " なんかおかしいのでset autochdirに変更
 " 永続的にUndoできるようにする(~/.vim/undoディレクトリ作成要)
 if has('persistent_undo')
 	set undodir=~/.vim/undo
