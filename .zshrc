@@ -42,8 +42,6 @@ function cd-up {
 }
 zle -N cd-up
 bindkey '^y' cd-up
-# cdの後にls実行
-chpwd() { ls }
 # <C-d>でログアウト無効
 setopt ignoreeof
 
@@ -109,4 +107,6 @@ type ncdu &> /dev/null \
 	&& alias du='ncdu --color dark -rr'
 type trans &> /dev/null \
 	&& alias ej='trans en:ja'
-# alias rgは~/.ripgreprcに記述
+
+# cdの後にls実行
+chpwd() { ls }
