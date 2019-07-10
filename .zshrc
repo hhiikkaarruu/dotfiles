@@ -1,4 +1,4 @@
-# 色を使用できるようにする。(意味不明)
+# 色を使用できるようにする。
 autoload -Uz colors
 colors
 # emacsのキーバインドに設定(通常のシェルの動作)
@@ -42,6 +42,8 @@ function cd-up {
 }
 zle -N cd-up
 bindkey '^y' cd-up
+# cdの後にls実行
+chpwd() { ls }
 # <C-d>でログアウト無効
 setopt ignoreeof
 
@@ -72,11 +74,39 @@ if [ ! -f ~/.zshrc.zwc ] || [ ~/.dotfiles/.zshrc -nt ~/.zshrc.zwc ]; then
 	zcompile ~/.zshrc
 fi
 
-# exa:dateの青が見づらいのでカラー解除
-export EXA_COLORS="da=0"
-
-export RIPGREP_CONFIG_PATH=~/.ripgreprc
 . ~/.fzfrc &> /dev/null
 . ~/.zshrc_local &> /dev/null
 
-eval "$(pyenv init -)"
+less_with_unbuffer() {
+	unbuffer "$@" |& less -SR
+}
+result_open_neovim() {
+	nvim <("$@")
+}
+# aliases
+alias cp='cp -i'
+alias mv='mv -i'
+alias mkdir='mkdir -p'
+alias ub=less_with_unbuffer
+# improve commands
+type rg &> /dev/null \
+	&& export RIPGREP_CONFIG_PATH=~/.ripgreprc
+type exa &> /dev/null \
+	&& alias ls='exa -F' \
+	&& alias ll='exa -FlBghm -snew'
+type nvim &> /dev/null \
+	&& alias nv='nvim' \
+	&& alias nvc=result_open_neovim
+type htop &> /dev/null \
+	&& alias top='htop -d 10'
+type dfc &> /dev/null \
+	&& alias df='dfc'
+type bat &> /dev/null \
+	&& alias cat='bat'
+type prettyping &> /dev/null \
+	&& alias ping='prettyping'
+type ncdu &> /dev/null \
+	&& alias du='ncdu --color dark -rr'
+type trans &> /dev/null \
+	&& alias ej='trans en:ja'
+# alias rgは~/.ripgreprcに記述
