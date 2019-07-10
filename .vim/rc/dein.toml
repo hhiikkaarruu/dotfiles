@@ -10,7 +10,7 @@ repo = 'roxma/vim-hug-neovim-rpc'
 if = ''' ! has('nvim') '''
 
 [[plugins]]
-repo = 'nanotech/jellybeans.vim'
+repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
@@ -26,15 +26,8 @@ hook_add = '''
        let g:airline#extensions#tabline#show_buffers = 0
        " タブ文字列
        let g:airline#extensions#tabline#formatter = 'unique_tail'
-       " タブとバッファ表示
-"      let g:airline#extensions#tabline#show_splits = 1
-"      let g:airline#extensions#tabline#show_buffers = 1
-"      let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
        " ale
        let g:airline#extensions#ale#enabled = 1
-
-       " 選択行列の表示をカスタム(デフォルトだと長くて横幅を圧迫するので最小限に)
-"      let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
 '''
  
 [[plugins]]

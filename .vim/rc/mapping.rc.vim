@@ -41,7 +41,7 @@ function! CloseTab()
 endfunction
 " タブ複製
 nnoremap tt <C-w>v<C-w>T
-" tab最高
+" tab
 nnoremap tf :<C-u>tabf 
 " タブ移動マッピング
 nnoremap <silent> tl :<C-u>tabn<CR>
@@ -90,12 +90,6 @@ tnoremap <silent> <C-h> <C-\><C-n><C-w>h
 tnoremap <silent> <C-l> <C-\><C-n><C-w>l
 " terminalショートカット
 nnoremap <silent> st <C-w>s:<C-u>terminal<CR>i
-" バッファやるぞー
+" バッファ
 nnoremap <silent> <C-n> :<C-u>bnext<CR>
 nnoremap <silent> <C-p> :<C-u>bprev<CR>
-" qでAll OK
-nnoremap <silent> <Leader>q :<C-u>call CloseDisp()<CR>
-function! CloseDisp()
-	exec 'q'
-endfunction
-
