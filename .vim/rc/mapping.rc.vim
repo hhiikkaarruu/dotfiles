@@ -8,9 +8,9 @@ vnoremap : ;
 " 思い立ったらすぐvimrc
 nnoremap <silent> <F2> :<C-u>tabf	$MYVIMRC<CR>
 nnoremap <silent> <F3> :<C-u>source	$MYVIMRC<CR>
-" Ctrl+jでEsc
-noremap  <C-j> <ESC>
-noremap! <C-j> <ESC>
+" " Ctrl+jでEsc	-> tmuxに割りあて
+" noremap  <C-j> <ESC>
+" noremap! <C-j> <ESC>
 " インサート中はjjでもエスケープ可能
 inoremap <silent> jj <ESC>
 " *をした箇所にカーソルが移動するようにする
