@@ -61,7 +61,7 @@ precmd () {
   local padwidth=$(($COLUMNS - ($leftwidth + $rightwidth) % $COLUMNS))
   print -P $left${(r:$padwidth:: :)}$right
 }
-PROMPT='%F{9}%n@%M %#%f '									# ユーザ名@ホスト名
+PROMPT='%F{green}%n@%M %#%f '									# ユーザ名@ホスト名
 RPROMPT=$'%F{38}<%?> %{\e[38;5;251m%}%D{%b %d}, %*%{\e[m%}'	# 現在時刻
 TMOUT=1
 TRAPALRM() {
@@ -109,4 +109,8 @@ type trans &> /dev/null \
 	&& alias ej='trans en:ja'
 
 # cdの後にls実行
-chpwd() { ls }
+chpwd() { exa -F }
+
+# autoload -Uz tetris
+# zle -N tetris
+# bindkey "..." tetris
