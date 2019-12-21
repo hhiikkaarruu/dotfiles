@@ -8,9 +8,9 @@ vnoremap : ;
 " 思い立ったらすぐvimrc
 nnoremap <silent> <F2> :<C-u>tabf	$MYVIMRC<CR>
 nnoremap <silent> <F3> :<C-u>source	$MYVIMRC<CR>
-" " Ctrl+jでEsc	-> tmuxに割りあて
-" noremap  <C-j> <ESC>
-" noremap! <C-j> <ESC>
+" Ctrl+jでEsc
+noremap  <C-j> <ESC>
+noremap! <C-j> <ESC>
 " インサート中はjjでもエスケープ可能
 inoremap <silent> jj <ESC>
 " *をした箇所にカーソルが移動するようにする
@@ -25,7 +25,6 @@ nnoremap <C-g> 1<C-g>
 " :grepの結果を次々と
 nnoremap <silent> <C-n> :<C-u>cn<CR>
 nnoremap <silent> <C-p> :<C-u>cp<CR>
-" grep love
 nnoremap gr :<C-u>grep 
 " 今開いているタブだけに
 nnoremap <silent> to :<C-u>tabo<CR>
