@@ -61,18 +61,18 @@ precmd () {
   local padwidth=$(($COLUMNS - ($leftwidth + $rightwidth) % $COLUMNS))
   print -P $left${(r:$padwidth:: :)}$right
 }
-PROMPT='%F{green}%n@%M %#%f '									# ユーザ名@ホスト名
+PROMPT='%F{red}%n@%M %#%f '									# ユーザ名@ホスト名
 RPROMPT=$'%F{38}<%?> %{\e[38;5;251m%}%D{%b %d}, %*%{\e[m%}'	# 現在時刻
 TMOUT=1
 TRAPALRM() {
   zle reset-prompt
 }
+
 # .zshrcコンパイル
 if [ ! -f ~/.zshrc.zwc ] || [ ~/.dotfiles/.zshrc -nt ~/.zshrc.zwc ]; then
 	zcompile ~/.zshrc
 fi
 
-. ~/.fzfrc &> /dev/null
 . ~/.zshrc_local &> /dev/null
 
 less_with_unbuffer() {
@@ -81,17 +81,20 @@ less_with_unbuffer() {
 result_open_neovim() {
 	nvim <("$@")
 }
+
 # aliases
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias ub=less_with_unbuffer
+
 # improve commands
 type rg &> /dev/null \
 	&& export RIPGREP_CONFIG_PATH=~/.ripgreprc
 type exa &> /dev/null \
 	&& alias ls='exa -F' \
-	&& alias ll='exa -FlBghm -snew'
+	&& alias ll='exa -FlBghm -snew' \
+	&& chpwd() { exa -F }
 type nvim &> /dev/null \
 	&& alias nv='nvim' \
 	&& alias nvc=result_open_neovim
@@ -107,10 +110,3 @@ type ncdu &> /dev/null \
 	&& alias du='ncdu --color dark -rr'
 type trans &> /dev/null \
 	&& alias ej='trans en:ja'
-
-# cdの後にls実行
-chpwd() { exa -F }
-
-# autoload -Uz tetris
-# zle -N tetris
-# bindkey "..." tetris

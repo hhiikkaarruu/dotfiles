@@ -9,6 +9,7 @@ export EDITOR=nvim
 path=(
 	${HOME}/bin(N-/)
 	${HOME}/.local/bin(N-/)
+	${HOME}/.config/composer/vendor/bin
 	/usr/local/bin(N-/)
 	/usr/local/sbin(N-/)
 	/usr/bin(N-/)
