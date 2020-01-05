@@ -89,3 +89,7 @@ hook_source = '''
 repo = 'Shougo/neoyank.vim'
 on_event = 'TextYankPost'
 on_source = ['denite.nvim']
+
+[[plugins]]
+repo = 'jwalton512/vim-blade'
+on_ft = 'php'
