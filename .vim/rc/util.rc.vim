@@ -41,3 +41,11 @@ if has('nvim')
 else
 	autocmd WinEnter * if &buftype ==# 'terminal' | normal i | endif
 endif
+
+" Windows Subsystem for Linuxでヤンクでクリップボードにコピー 2020/01/15
+if system('uname -a | grep Microsoft') != ''
+	augroup myYank
+		autocmd!
+		autocmd TextYankPost * :call system('/mnt/c/Windows/System32/clip.exe', @")
+	augroup END
+endif

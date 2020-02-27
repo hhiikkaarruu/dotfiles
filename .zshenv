@@ -9,7 +9,9 @@ export EDITOR=nvim
 path=(
 	${HOME}/bin(N-/)
 	${HOME}/.local/bin(N-/)
-	${HOME}/.config/composer/vendor/bin
+# 	${HOME}/.config/composer/vendor/bin
+	${HOME}/.composer/vendor/bin
+	${HOME}/.cargo/bin
 	/usr/local/bin(N-/)
 	/usr/local/sbin(N-/)
 	/usr/bin(N-/)
@@ -17,6 +19,7 @@ path=(
 	/bin(N-/)
 	/sbin(N-/)
 	.
+	${PATH}
 )
 
 # CDPATHの設定(どこにいてもCDPATH直下にいるようにcd移動できる)

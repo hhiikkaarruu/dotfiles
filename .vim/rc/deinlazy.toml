@@ -93,3 +93,7 @@ on_source = ['denite.nvim']
 [[plugins]]
 repo = 'jwalton512/vim-blade'
 on_ft = 'php'
+
+[[plugins]]
+repo = 'posva/vim-vue'
+on_ft = 'vue'

@@ -28,7 +28,7 @@ set number							" 行番号表示
 set cinoptions=(0					" else if文のインデントをいい感じにする
 set foldmethod=marker
 set foldlevel=0
-set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932,sjis	" ファイルのエンコードを自動判定する
+set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932,sjis,utf-16le	" ファイルのエンコードを自動判定する
 set nowrapscan						" 検索時終端から始端に戻らない
 set textwidth=0						" 自動改行の抑制
 set dictionary=~/.vim/c.dict		" 辞書ファイルパス

@@ -87,6 +87,8 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias ub=less_with_unbuffer
+alias cdp='cd -P'
+alias tree='tree -C | more'
 
 # improve commands
 type rg &> /dev/null \
