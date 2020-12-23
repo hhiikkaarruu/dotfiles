@@ -49,3 +49,6 @@ if system('uname -a | grep Microsoft') != ''
 		autocmd TextYankPost * :call system('/mnt/c/Windows/System32/clip.exe', @")
 	augroup END
 endif
+
+let g:python_host_prog = system('echo -n $(which python2)')
+let g:python3_host_prog = system('echo -n $(which python3)')
