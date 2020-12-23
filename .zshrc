@@ -1,16 +1,16 @@
-# 色を使用できるようにする。
+# enable color
 autoload -Uz colors
 colors
-# emacsのキーバインドに設定(通常のシェルの動作)
+# set emacs keybind(default behavior of shell)
 bindkey -e
-# bindkey -v # vimのキーバインド
+# bindkey -v # vim keybind
 # auto complete
 autoload -U compinit; compinit
 # ?
 zstyle ':completion:*:default' menu select=1
 # タブによるファイル切り替えをしない
 unsetopt auto_menu
-# コマンド履歴設定
+# command history setting
 HISTFILE=~/.zsh_history
 HISTSIZE=6000000
 SAVEHIST=6000000
