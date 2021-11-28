@@ -11,7 +11,7 @@ set smartcase						" 検索時大文字での検索は大文字小文字を区�
 set ruler							" カーソルが何行目の何列目に置かれているかを表示する
 set showmode						" 現在のモードを表示する
 set incsearch						" 検索時マッチしたものすべてをインクリメンタルにハイライトする
-set guifontset=-*-fixed-medium-r-normal--16-*-*-*-c-*,*-r-*	" 使用されるフォントのリスト
+" set guifontset=-*-fixed-medium-r-normal--16-*-*-*-c-*,*-r-*	" 使用されるフォントのリスト
 set laststatus=2					" ステータスバー位置
 set nobk							" バックアップファイルを自動生成しない
 set backspace=2						" バックスペースの設定
