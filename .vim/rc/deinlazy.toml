@@ -1,82 +1,3 @@
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-on_event = 'InsertEnter'
-hook_source = '''
-	let g:deoplete#enable_at_startup = 1
-'''
-hook_post_source = '''
-	source ~/.vim/rc/plugins/deoplete.rc.vim
-'''
-
-[[plugins]]
-repo = 'zchee/deoplete-zsh'
-on_ft = 'zsh'
-
-[[plugins]]
-repo = 'osyo-manga/vim-precious'
-on_ft = 'toml'
-
-[[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = 'toml'
-
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'
-on_ft = 'toml'
-hook_source = '''
-	if !exists('g:context_filetype#filetypes')
-		let g:context_filetype#filetypes = {}
-	endif
-	let g:context_filetype#filetypes['toml'] = [
-		\ {'filetype':'vim', 'start':'^\s*hook_\(add\|source\|post_source\)\s*=\s*'.'""'.'"', 'end':'""'.'"'},
-		\ {'filetype':'vim', 'start':'^\s*hook_\(add\|source\|post_source\)\s*=\s*'."''"."'", 'end':"''"."'"},
-		\ ]
-'''
-
-[[plugins]]
-repo = 'Shougo/denite.nvim'
-on_cmd = 'Denite'
-hook_source = '''
-	source ~/.vim/rc/plugins/denite.rc.vim
-'''
-hook_add = '''
-	nnoremap [Denite] <Nop>
-	nmap <Space> [Denite]
-
-	nnoremap [Denite]f :<C-u>Denite file_rec -path=
-	nnoremap <silent> [Denite]g :<C-u>Denite -buffer-name=search -no-empty grep<CR>
-	nnoremap <silent> [Denite]c :<C-u>DeniteCursorWord -buffer-name=search -no-empty grep<CR>
-	nnoremap <silent> [Denite]h :<C-u>Denite -buffer-name=search -resume<CR>
-	nnoremap <silent> [Denite]n :<C-u>Denite -buffer-name=search -resume -select=+1 -immediately<CR>
-	nnoremap <silent> [Denite]p :<C-u>Denite -buffer-name=search -resume -select=-1 -immediately<CR>
-	nnoremap <silent> [Denite]/ :<C-u>Denite -buffer-name=search -auto-highlight line<CR>
-	nnoremap <silent> [Denite]* :<C-u>DeniteCursorWord -buffer-name=search -auto-highlight line<CR>
-	nnoremap <silent> [Denite]r :<C-u>Denite -buffer-name=register register neoyank<CR>
-	xnoremap <silent> [Denite]r :<C-u>Denite -default-action=replace -buffer-name=register register neoyank<CR>
-	nnoremap <silent> [Denite]b :<C-u>Denite buffer<CR>
-	nnoremap <silent> [Denite]t :<C-U>Denite filetype<CR>
-'''
-
-[plugins.ftplugin]
-denite = '''
-	" Define mappings
-	nnoremap <silent><buffer><expr> <CR>
-	\ denite#do_map('do_action')
-	nnoremap <silent><buffer><expr> a
-	\ denite#do_map('choose_action')
-	nnoremap <silent><buffer><expr> d
-	\ denite#do_map('do_action', 'delete')
-	nnoremap <silent><buffer><expr> p
-	\ denite#do_map('do_action', 'preview')
-	nnoremap <silent><buffer><expr> q
-	\ denite#do_map('quit')
-	nnoremap <silent><buffer><expr> '
-	\ denite#do_map('quick_move')
-	nnoremap <silent><buffer><expr> i
-	\ denite#do_map('open_filter_buffer')
-	nnoremap <silent><buffer><expr> <Space>
-	\ denite#do_map('toggle_select').'j'
-'''
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
@@ -85,15 +6,21 @@ hook_source = '''
 	source ~/.vim/rc/plugins/lexima.rc.vim
 '''
 
+# following is for toml
 [[plugins]]
-repo = 'Shougo/neoyank.vim'
-on_event = 'TextYankPost'
-on_source = ['denite.nvim']
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
 
 [[plugins]]
-repo = 'jwalton512/vim-blade'
-on_ft = 'php'
+repo = 'osyo-manga/vim-precious'
+on_ft = 'toml'
 
 [[plugins]]
-repo = 'posva/vim-vue'
-on_ft = 'vue'
+repo = 'Shougo/context_filetype.vim'
+on_ft = 'toml'
+hook_source = '''
+	let g:context_filetype#ignore_patterns = {
+    \ 'toml': ['^\s*#\s*'],
+	\ }
+'''
+# above is for toml

@@ -17,13 +17,15 @@ if dein#load_state(s:dein_path)
 	call dein#begin(s:dein_path)
 	call dein#load_toml('~/.vim/rc/dein.toml', {'lazy': 0})
 	call dein#load_toml('~/.vim/rc/deinlazy.toml', {'lazy': 1})
+	call dein#load_toml('~/.vim/rc/ddc.toml', {'lazy': 1})
 	call dein#end()
 	call dein#save_state()
 endif
 
-set background=dark
-colorscheme hybrid
-
 if dein#check_install()
 	call dein#install()
 endif
+
+syntax enable
+set background=dark
+colorscheme hybrid
