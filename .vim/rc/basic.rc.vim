@@ -50,3 +50,4 @@ endif
 set cmdheight=2                                        " 邪魔だけどこれでgrepで聞かれない。
 set splitright                                         " quickrunの結果表示位置変更
 set splitbelow                                         " quickrunの結果表示位置変更
+set clipboard+=unnamedplus			" share clipboard with os

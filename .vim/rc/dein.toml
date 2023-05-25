@@ -2,12 +2,11 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'roxma/nvim-yarp'
-if = ''' ! has('nvim') '''
+repo = 'roxma/vim-hug-neovim-rpc'
+if = '!has("nvim")'
 
 [[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
-if = ''' ! has('nvim') '''
+repo = 'roxma/nvim-yarp'
 
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
@@ -16,17 +15,11 @@ repo = 'w0ng/vim-hybrid'
 repo = 'vim-airline/vim-airline'
 depends = ['vim-airline-themes']
 hook_add = '''
-       " パワーライン
        let g:airline_powerline_fonts = 1
-       " カラーテーマ
        let g:airline_theme = 'minimalist'
-       " タブバー
        let g:airline#extensions#tabline#enabled = 1
-       " （タブが一個の場合）バッファのリストをタブラインに表示する機能をオフ
        let g:airline#extensions#tabline#show_buffers = 0
-       " タブ文字列
        let g:airline#extensions#tabline#formatter = 'unique_tail'
-       " ale
        let g:airline#extensions#ale#enabled = 1
 '''
  
@@ -50,9 +43,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'Shougo/vim-vcs'
-
-[[plugins]]
 repo = 'tyru/caw.vim'
 hook_add = '''
 	nmap <Leader>c <Plug>(caw:zeropos:comment)
@@ -61,15 +51,18 @@ hook_add = '''
 	vmap <Leader>C <Plug>(caw:zeropos:uncomment)
 '''
 
-[[plugins]]
-repo = 'Shougo/neomru.vim'
-
-[[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
+# [[plugins]]
+# repo = 'Shougo/vimproc.vim'
+# build = 'make'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_add = '''
-	let g:quickrun_config = {'*': {'split': ''}}
+" 	nnoremap <silent> <Leader>r <Plug>(quickrun)
+	nnoremap <silent> <Leader>r :<C-u>QuickRun -mode n<CR>
+"  	let g:quickrun_config = {'*': {'split': ''}}
+	let g:quickrun_config = get(g:, 'quickrun_config', {})
+	let g:quickrun_config._ = {
+		  \ 'outputter/buffer/opener': 'new',
+		  \ }
 '''

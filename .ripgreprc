@@ -1,3 +1,5 @@
 # exclude                                                                                                                                                                                                     
 -S
 --no-heading 
+--hidden
+--binary
