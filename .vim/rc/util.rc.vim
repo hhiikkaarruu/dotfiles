@@ -1,18 +1,21 @@
-" カーソル位置の行列をハイライト
-set cursorcolumn
+" highlight cursor line and column
 set cursorline
+set cursorcolumn
 highlight clear CursorLine
-" 永続的にUndoできるようにする(~/.vim/undoディレクトリ作成要)
+
+" save undo (use ~/.vim/undo directory)
 if has('persistent_undo')
 	set undodir=~/.vim/undo
 	set undofile
 endif
-" grepをripgrepに変更
+
+" change grep to repgrep if exists
 if executable('/usr/bin/rg')
 	set grepprg=rg\ --vimgrep\ --no-heading\ $*
 	set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
-" vimdiff設定
+
+" vimdiff setting
 au FilterWritePre * if &diff | set wrap | endif
 hi DiffAdd		cterm=bold ctermfg=10 ctermbg=22
 hi DiffDelete	cterm=bold ctermfg=10 ctermbg=52
@@ -35,14 +38,14 @@ endfunction
 command! -bar -nargs=+ -complete=file VimDiff call s:vimdiff_in_newtab(<f-args>)
 filetype indent plugin on
 
-" ウィンドウを移動したときにterminal-jobモードに
+" change terminal-job mode when move window
 if has('nvim')
 	autocmd WinEnter * if &buftype ==# 'terminal' | startinsert | endif
 else
 	autocmd WinEnter * if &buftype ==# 'terminal' | normal i | endif
 endif
 
-" Windows Subsystem for Linuxでヤンクでクリップボードにコピー 2020/01/15
+" copy to clipboard in WSL
 if system('uname -a | grep Microsoft') != ''
 	augroup myYank
 		autocmd!
@@ -52,3 +55,4 @@ endif
 
 let g:python_host_prog = system('echo -n $(which python2)')
 let g:python3_host_prog = system('echo -n $(which python3)')
+

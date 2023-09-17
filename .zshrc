@@ -1,79 +1,98 @@
 # enable color
 autoload -Uz colors
 colors
+
 # set emacs keybind(default behavior of shell)
 bindkey -e
+
 # bindkey -v # vim keybind
 # auto complete
 autoload -U compinit; compinit
+
 # ?
 zstyle ':completion:*:default' menu select=1
-# タブによるファイル切り替えをしない
+
+# specify <Tab> bihind
 unsetopt auto_menu
+
 # command history setting
 HISTFILE=~/.zsh_history
 HISTSIZE=6000000
 SAVEHIST=6000000
-# 同じコマンドをヒストリに残さない
+
+# unique history
 setopt hist_ignore_all_dups
-# zsh間でヒストリを共有する
+# share history
 setopt share_history
-# ヒストリファイルに保存する時、重複を古い方から削除
+# unique history's setting (fifo)
 setopt hist_save_nodups
-# ヒストリに保存するときに余分なスペースを削除
+# history space deletion
 setopt hist_reduce_blanks
+
+# history search
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
-# cdしたら自動的にpushdする。(cd -<Tab>でcd履歴が見れる。)
+
+# auto pushd (can be viewed on cd -<Tab>)
 setopt auto_pushd
-# 重複したディレクトリを追加しない。
+# unique pushd
 setopt pushd_ignore_dups
-# 単語の区切り文字を指定する。(/を区切り文字にすることで<C-w>でディレクトリ１つ分を削除できる)
+
+# specify word delimiter (useful in <C-w>)
 autoload -U select-word-style
 select-word-style bash
-# beep無効
+
+# disable beep
 setopt no_beep
-# <C-y>で上のディレクトリ移動
+
+# move to parent directory on <C-y>
 function cd-up {
 	zle push-line && LBUFFER='builtin cd ..' && zle accept-line
 }
 zle -N cd-up
 bindkey '^y' cd-up
-# <C-d>でログアウト無効
+
+# disable <C-d> (disable logout shortcut)
 setopt ignoreeof
 
 # custom prompt
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats '[%b]'
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
+# right prompt
 precmd () {
-  local left='%F{11}[%d]%f'									# カレントディレクトリ, execute result.
-  vcs_info													# バージョン管理されてた場合、ブランチ名
-  local right="%{\e[38;5;32m%}${vcs_info_msg_0_}%{\e[m%}"
-  # スペースの長さを計算
-  # テキストを装飾する場合、エスケープシーケンスをカウントしないようにします
-  local invisible='%([BSUbfksu]|([FK]|){*})'
-  local leftwidth=${#${(S%%)left//$~invisible/}}
-  local rightwidth=${#${(S%%)right//$~invisible/}}
-  local padwidth=$(($COLUMNS - ($leftwidth + $rightwidth) % $COLUMNS))
-  print -P $left${(r:$padwidth:: :)}$right
+	# current directory in yallow
+	local left='%F{11}[%d]%f'
+	# branch name when versioned
+	vcs_info
+	local right="%{\e[38;5;32m%}${vcs_info_msg_0_}%{\e[m%}"
+	# caluculate space length
+	local invisible='%([BSUbfksu]|([FK]|){*})'
+	local leftwidth=${#${(S%%)left//$~invisible/}}
+	local rightwidth=${#${(S%%)right//$~invisible/}}
+	local padwidth=$(($COLUMNS - ($leftwidth + $rightwidth) % $COLUMNS))
+	print -P $left${(r:$padwidth:: :)}$right
 }
-# PROMPT='%F{white}%n@%M %#%f '									# ユーザ名@ホスト名
-PROMPT='%F{green}%n@%M %#%f '									# ユーザ名@ホスト名
-RPROMPT=$'%F{38}<%?> %{\e[38;5;251m%}%D{%b %d}, %*%{\e[m%}'	# 現在時刻
+# left prompt
+# user@host in green
+PROMPT='%F{green}%n@%M %#%f '
+# <execution result> current time
+RPROMPT=$'%F{38}<%?> %{\e[38;5;251m%}%D{%b %d}, %*%{\e[m%}'
+
 TMOUT=1
 TRAPALRM() {
   zle reset-prompt
 }
 
-# .zshrcコンパイル
+# compile .zshrc for loading
 if [ ! -f ~/.zshrc.zwc ] || [ ~/.dotfiles/.zshrc -nt ~/.zshrc.zwc ]; then
 	zcompile ~/.zshrc
 fi
 
+# load private zshrc setting
 . ~/.zshrc_local &> /dev/null
 
 less_with_unbuffer() {
@@ -91,12 +110,12 @@ alias ub=less_with_unbuffer
 alias cdp='cd -P'
 alias tree='tree -C | more'
 
-# improve commands
+# use improve commands if exists
 type rg &> /dev/null \
 	&& export RIPGREP_CONFIG_PATH=~/.ripgreprc
 type exa &> /dev/null \
 	&& alias ls='exa -F' \
-	&& alias ll='exa -FlBghm -snew' \
+	&& alias ll='exa -FlBghm -snew --time-style=full-iso' \
 	&& chpwd() { exa -F }
 type nvim &> /dev/null \
 	&& alias nv='nvim' \
@@ -113,3 +132,4 @@ type ncdu &> /dev/null \
 	&& alias du='ncdu --color dark -rr'
 type trans &> /dev/null \
 	&& alias ej='trans en:ja'
+

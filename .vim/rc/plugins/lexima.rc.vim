@@ -18,3 +18,4 @@ call lexima#add_rule({'at': "\%#\n\s*'", 'char': "'", 'input': "'", 'delete': "'
 call lexima#add_rule({'at': '\%#\n\s*]', 'char': ']', 'input': ']', 'delete': ']'})
 call lexima#add_rule({'at': '\%#\n\s*}', 'char': '}', 'input': '}', 'delete': '}'})
 call lexima#add_rule({'at': '\%#\n\s*`', 'char': '`', 'input': '`', 'delete': '`'})
+

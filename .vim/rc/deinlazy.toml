@@ -6,7 +6,6 @@ hook_source = '''
 	source ~/.vim/rc/plugins/lexima.rc.vim
 '''
 
-# following is for toml
 [[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
@@ -23,4 +22,3 @@ hook_source = '''
     \ 'toml': ['^\s*#\s*'],
 	\ }
 '''
-# above is for toml

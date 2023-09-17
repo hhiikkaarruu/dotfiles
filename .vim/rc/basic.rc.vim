@@ -1,53 +1,109 @@
 set nocompatible
-set ambiwidth=single				" doubleだとpowerline使えない
-set noexpandtab						" tabを挿入する(スペースに置き換えない)
-set tabstop=4						" タブを４文字分にする
-set shiftwidth=4					" 自動インデントで挿入されるタブを４文字分にする
+
+" cannot use powerline when ambiwidth is double
+set ambiwidth=single
+
+" not use space
+set noexpandtab
+
+" tab =- 4 spaces
+set tabstop=4
+set shiftwidth=4
 set softtabstop=0
-set autoindent						" 改行時に半角スペースを自動挿入
-set showmatch						" 対応する括弧を表示
-set ignorecase						" 検索時大文字小文字を区別しない
-set smartcase						" 検索時大文字での検索は大文字小文字を区別する
-set ruler							" カーソルが何行目の何列目に置かれているかを表示する
-set showmode						" 現在のモードを表示する
-set incsearch						" 検索時マッチしたものすべてをインクリメンタルにハイライトする
-" set guifontset=-*-fixed-medium-r-normal--16-*-*-*-c-*,*-r-*	" 使用されるフォントのリスト
-set laststatus=2					" ステータスバー位置
-set nobk							" バックアップファイルを自動生成しない
-set backspace=2						" バックスペースの設定
-set cindent							" インデントの設定
-set nf=alpha						" VIMのインクリメントでアルファベットをインクリメントできるようにする
-set wildmode=list:longest:full		" ファイル名の補完をbashと同じ設定にする
-"set list							" 隠し文字表示
-"set listchars=tab:\|-,trail:-
-set list lcs=tab:\|\ 
-set t_Co=256						" スクリーン上で２５６色使用する
-set mouse=a							" マウス利用に設定する
-set nowrap							" 折り返さない
-set number							" 行番号表示
-set cinoptions=(0					" else if文のインデントをいい感じにする
-set foldmethod=marker
-set foldlevel=0
-set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932,sjis,utf-16le	" ファイルのエンコードを自動判定する
-set nowrapscan						" 検索時終端から始端に戻らない
-set textwidth=0						" 自動改行の抑制
-set dictionary=~/.vim/c.dict		" 辞書ファイルパス
-set tags=.vimtags;					" タグファイルの指定(階層)
-set formatoptions-=ro				" 勝手にコメントアウトを無効にする
-set display=lastline				" ウィンドウの最後の行をできる限りまで表示する(収まらない場合@)
-set modeline						" モードラインを有効にする
-set modelines=3						" モードラインの検索行数を設定する
-set hlsearch						" 検索ハイライト
+
+set autoindent
+
+" show brackets
+set showmatch
+
+" search setting
+set ignorecase
+set smartcase
+set nowrapscan
+set hlsearch
 if has('nvim')
 	set inccommand=split
 endif
-set autochdir						" 開いているファイルのディレクトリをカレントディレクトリに
+
+" cursor setting
+set ruler
+
+set showmode
+
+set incsearch
+
+set laststatus=2
+
+" not auto generate backup file
+set nobk
+
+set backspace=2
+
+set cindent
+
+" can incement alphabet
+set nf=alpha
+
+" make vim's file complement the same as bash
+set wildmode=list:longest:full
+
+set list lcs=tab:\|\ 
+
+" use 256 colors in screen
+set t_Co=256
+
+" use mouse
+set mouse=a
+
+" not wrap line
+set nowrap
+
+" show line number
+set number
+
+" for else if indent
+set cinoptions=(0
+
+" fold setting
+set foldmethod=marker
+set foldlevel=0
+
+" auto judge encoding
+set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932,sjis,utf-16le
+
+" disable auto newline
+set textwidth=0
+
+" specify tag file (with recurcive)
+set tags=.vimtags;
+
+" disable auto comment out
+set formatoptions-=ro
+
+set display=lastline
+
+" modeline setting
+set modeline
+set modelines=3
+
+" set current directory to open file's directory
+set autochdir
+
 set sh=zsh
-set hidden							" 未保存でのバッファ切替有効
+
+" enable change baffer when unsaved
+set hidden
 if has('nvim')
        set inccommand=split
 endif
-set cmdheight=2                                        " 邪魔だけどこれでgrepで聞かれない。
-set splitright                                         " quickrunの結果表示位置変更
-set splitbelow                                         " quickrunの結果表示位置変更
-set clipboard+=unnamedplus			" share clipboard with os
+
+" quiet when grep result has 2 lines
+set cmdheight=2
+
+" quickrun setting
+set splitright
+set splitbelow
+
+" share clipboard with os
+set clipboard+=unnamedplus
+
