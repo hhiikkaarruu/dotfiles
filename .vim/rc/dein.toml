@@ -7,26 +7,10 @@ if = '!has("nvim")'
 
 [[plugins]]
 repo = 'roxma/nvim-yarp'
+if = '!has("nvim")'
 
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
-
-[[plugins]]
-repo = 'vim-airline/vim-airline'
-depends = ['vim-airline-themes']
-hook_add = '''
-       let g:airline_powerline_fonts = 1
-       let g:airline_theme = 'minimalist'
-       let g:airline#extensions#tabline#enabled = 1
-       let g:airline#extensions#tabline#show_buffers = 0
-       let g:airline#extensions#tabline#formatter = 'unique_tail'
-       let g:airline#extensions#ale#enabled = 1
-       " タブに表示されるパスをファイル名のみにする
-       let g:airline#extensions#tabline#fnamemod = ':t'
-'''
- 
-[[plugins]]
-repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
@@ -52,10 +36,6 @@ hook_add = '''
 	nmap <Leader>C <Plug>(caw:zeropos:uncomment)
 	vmap <Leader>C <Plug>(caw:zeropos:uncomment)
 '''
-
-# [[plugins]]
-# repo = 'Shougo/vimproc.vim'
-# build = 'make'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
