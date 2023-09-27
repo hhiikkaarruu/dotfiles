@@ -1,3 +1,31 @@
+# environment
+# (N-/)
+# 	N:存在しない場合、エラーの代わりに空文字展開
+# 	-:シンボリックリンクの実体を追いかけて判定
+# 	/:ディレクトリ
+export EDITOR=nvim
+export GOPATH=${HOME}/.go
+export VOLTA_HOME=${HOME}/.volta
+path=(
+	${HOME}/bin(N-/)
+	${HOME}/.local/bin(N-/)
+	${HOME}/.composer/vendor/bin(N-/)
+	${HOME}/.cargo/bin(N-/)
+	${GOPATH}/bin(N-/)
+	${VOLTA_HOME}/bin(N-/)
+	/usr/local/bin(N-/)
+	/usr/local/sbin(N-/)
+	/usr/bin(N-/)
+	/usr/sbin(N-/)
+	/bin(N-/)
+	/sbin(N-/)
+	.
+	${PATH}
+)
+# you can move following by $(cd) in anywhere
+cdpath=(
+)
+
 # enable color
 autoload -Uz colors
 colors
