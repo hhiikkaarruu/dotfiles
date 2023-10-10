@@ -1,11 +1,8 @@
-# environment
+# path
 # (N-/)
 # 	N:存在しない場合、エラーの代わりに空文字展開
 # 	-:シンボリックリンクの実体を追いかけて判定
 # 	/:ディレクトリ
-export EDITOR=nvim
-export GOPATH=${HOME}/.go
-export VOLTA_HOME=${HOME}/.volta
 path=(
 	${HOME}/bin(N-/)
 	${HOME}/.local/bin(N-/)
