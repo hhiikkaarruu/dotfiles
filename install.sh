@@ -1,24 +1,27 @@
 #!/usr/bin/env zsh
 
-GIT_DOTPATH="${HOME}/dotfiles"
-DOTPATH="${HOME}/.dotfiles"
+cd $(dirname $0)
 
-mv "${GIT_DOTPATH}" "${DOTPATH}" &> /dev/null
-cd "${DOTPATH}"
+PWD=$(pwd)
+DOTDIRPATH=${HOME}/.dotfiles
+
+mv ${PWD} ${DOTDIRPATH} &> /dev/null
+cd ${DOTDIRPATH}
 if [ $? -ne 0 ]; then
-	echo "not found:${DOTPATH}"
+	echo "not found: ${DOTDIRPATH}"
 fi
 
-for f in .??*
+for f in *
 do
-	[ "${f}" = ".git" ] && continue
-	[ "${f}" = ".swp" ] && continue
+	[ ${f} = 'README.md' ] && continue
+	[ ${f} = 'install.sh' ] && continue
+	[ ${f} = 'uninstall.sh' ] && continue
 
-	ln -snfv "${DOTPATH}/${f}" "${HOME}/${f}"
+	ln -snfv ${DOTDIRPATH}/${f} ${HOME}/.${f}
 done
 
-ln -snfv "${DOTPATH}/.vimrc" "${DOTPATH}/.vim/init.vim"
-mkdir -p "${HOME}/.config"
-ln -snfv "${DOTPATH}/.vim" "${HOME}/.config/nvim"
+mkdir -p ${HOME}/.config
+ln -snfv ${DOTDIRPATH}/vim ${HOME}/.config/nvim
+ 
+echo 'dotfiles installation has been complated !'
 
-echo 'installation has been complated. ✔︎'
