@@ -1,0 +1,21 @@
+[include]
+	path = .gitconfig.user
+
+[core]
+	editor = nvim
+	ignorecase = false
+	quotepath = false
+	autoctlf = false
+
+[push]
+	default = simple
+
+[credential]
+	helper = store
+
+[url "ssh://git@github.com"]
+	insteadOf = https://github.com
+
+[alias]
+	gl = log --pretty='format:%C(yellow)%h %C(green)%cd %C(reset)%s %C(red)%d %C(cyan)[%an]' --date=format:'%c' --all --graph --name-status
+

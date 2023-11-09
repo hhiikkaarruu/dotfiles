@@ -27,4 +27,4 @@ endif
 
 syntax enable
 set background=dark
-colorscheme tokyonight-moon
+colorscheme hybrid

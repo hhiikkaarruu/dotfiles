@@ -1,5 +1,13 @@
 #!/usr/bin/env zsh
 
+function check_prog() {
+    if ! hash "$1" > /dev/null 2>&1; then
+        echo "command not found: $1. aborting..."
+        exit 1
+    fi
+}
+check_prog stow
+
 cd $(dirname $0)
 
 for f in *
@@ -8,13 +16,8 @@ do
 	[ ${f} = 'install.sh' ] && continue
 	[ ${f} = 'uninstall.sh' ] && continue
 
-	dotfilepath="${HOME}/.${f}"
-
-	[ ! -L ${dotfilepath} ] && continue
-
-	unlink ${dotfilepath}
+	stow --target ${HOME} --delete ${f}
 done
 
-nvimdirpath=${HOME}/.config/nvim
-[ -L ${nvimdirpath} ] && unlink ${nvimdirpath}
+echo 'dotfiles uninstallation has been complated !'
 
