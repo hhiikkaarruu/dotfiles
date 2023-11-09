@@ -39,6 +39,8 @@ zstyle ':completion:*:default' menu select=1
 
 # specify <Tab> bihind
 unsetopt auto_menu
+# completion for hidden file
+setopt globdots
 
 # command history setting
 HISTFILE=~/.zsh_history
@@ -84,9 +86,11 @@ bindkey '^y' cd-up
 setopt ignoreeof
 
 # custom prompt
+autoload -Uz add-zsh-hook
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats '[%b]'
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
+setopt PROMPT_SUBST
+zstyle ':vcs_info:*' formats '%m [%b]'
+zstyle ':vcs_info:*' actionformats '%m [%b|%a]'
 # right prompt
 precmd () {
 	# current directory in yallow
@@ -101,11 +105,18 @@ precmd () {
 	local padwidth=$(($COLUMNS - ($leftwidth + $rightwidth) % $COLUMNS))
 	print -P $left${(r:$padwidth:: :)}$right
 }
+_vcs_precmd () { vcs_info }
+add-zsh-hook precmd _vcs_precmd
 # left prompt
 # user@host in green
 PROMPT='%F{green}%n@%M %#%f '
 # <execution result> current time
 RPROMPT=$'%F{38}<%?> %{\e[38;5;251m%}%D{%b %d}, %*%{\e[m%}'
+
+zstyle ':vcs_info:git+set-message:*' hooks git-config-user
+function +vi-git-config-user(){
+	hook_com[misc]+=$(git config user.email)
+}
 
 TMOUT=1
 TRAPALRM() {
@@ -133,7 +144,6 @@ alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias ub=less_with_unbuffer
 alias cdp='cd -P'
-alias tree='tree -C | more'
 
 # use improve commands if exists
 type rg &> /dev/null \
@@ -141,7 +151,7 @@ type rg &> /dev/null \
 type exa &> /dev/null \
 	&& alias ls='exa -F' \
 	&& alias ll='exa -FlBghm -snew --time-style=full-iso' \
-	&& chpwd() { exa -F }
+	&& chpwd() { exa -a -F }
 type nvim &> /dev/null \
 	&& alias nv='nvim' \
 	&& alias nvc=result_open_neovim
