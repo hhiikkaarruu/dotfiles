@@ -10,7 +10,7 @@ return {
 				options = {
 					-- mode = 'tabs',
 					diagnostics = 'nvim_lsp',
-					separator_style = 'thin',  -- slant, thick
+					separator_style = 'thin', -- slant, thick
 					offsets = {
 						{
 							filetype = 'NvimTree',
@@ -22,3 +22,4 @@ return {
 		end,
 	},
 }
+

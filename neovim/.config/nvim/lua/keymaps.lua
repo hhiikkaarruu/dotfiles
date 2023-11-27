@@ -1,54 +1,41 @@
-local n = 'n'
-local i = 'i'
-local v = 'v'
-local noremap = {noremap = true}
-local noremap_silent = {noremap = true, silent = true}
-local map = vim.api.nvim_set_keymap
-
-map(n, ' ', '', {})
-vim.g.mapleader = ' '
-
-------------------------------
--- Modes
---   normal_mode = 'n',
---   insert_mode = 'i',
---   visual_mode = 'v',
---   visual_block_mode = 'x',
---   term_mode = 't',
---   command_mode = 'c',
-------------------------------
+local h = require('helpers.map')
+local noremap = { noremap = true }
 
 ------------------------------
 -- base keymaps
 ------------------------------
+-- set leader to space
+h.nmap(' ', '', {})
+vim.g.mapleader = ' '
+
 -- for english keyboard
-map(n, ';', ':', noremap)
-map(n, ':', ';', noremap)
-map(v, ';', ':', noremap)
-map(v, ':', ';', noremap)
+h.nmap(';', ':', noremap)
+h.nmap(':', ';', noremap)
+h.vmap(';', ':', noremap)
+h.vmap(':', ';', noremap)
 
 -- for wrapped line
-map(n, 'j', 'gj', noremap_silent)
-map(n, 'k', 'gk', noremap_silent)
-map(v, 'j', 'gj', noremap_silent)
-map(v, 'k', 'gk', noremap_silent)
+h.nmap('j', 'gj')
+h.nmap('k', 'gk')
+h.vmap('j', 'gj')
+h.vmap('k', 'gk')
 
 -- esc is really far away from home position
-map(i, 'kj', '<esc>', noremap_silent)
+h.imap('kj', '<esc>')
 
 -- it is convenient, but do not do it on your own
-map(n, 'ZZ', '<nop>', noremap_silent)
-map(n, 'ZQ', '<nop>', noremap_silent)
+h.nmap('ZZ', '<nop>')
+h.nmap('ZQ', '<nop>')
 
 -- i wish it was the default
-map(n, 'Y', 'y$', noremap_silent)
+h.nmap('Y', 'y$')
 
 -- do not fly on your own
-map(n, '*', '*N', noremap_silent)
-map(n, '#', '#n', noremap_silent)
+h.nmap('*', '*N')
+h.nmap('#', '#n')
 
 -- show full path on <C-g>
-map(n, '<c-g>', '1<c-g>', noremap_silent)
+h.nmap('<c-g>', '1<c-g>')
 
 
 ------------------------------
@@ -78,28 +65,42 @@ map(n, '<c-g>', '1<c-g>', noremap_silent)
 -- buffer keymaps
 ------------------------------
 -- buffer switching
-map(n, 'tl', '<cmd>bnext<cr>', noremap_silent)
-map(n, 'th', '<cmd>bprev<cr>', noremap_silent)
+h.nmap('tl', '<cmd>bnext<cr>')
+h.nmap('th', '<cmd>bprev<cr>')
 
 -- quit current buffer
-map(n, '<leader>q', '<cmd>bprev<cr><cmd>bd#<cr>', noremap_silent)
+h.nmap('<leader>q', '<cmd>bprev<cr><cmd>bd#<cr>')
 
 ------------------------------
 -- window keymaps
 ------------------------------
 -- window switching
-map(n, '<c-j>', '<c-w>j', noremap_silent)
-map(n, '<c-k>', '<c-w>k', noremap_silent)
-map(n, '<c-h>', '<c-w>h', noremap_silent)
-map(n, '<c-l>', '<c-w>l', noremap_silent)
+h.nmap('<c-j>', '<c-w>j')
+h.nmap('<c-k>', '<c-w>k')
+h.nmap('<c-h>', '<c-w>h')
+h.nmap('<c-l>', '<c-w>l')
 
 ------------------------------
 -- useful keymaps
 ------------------------------
 -- same indent moving
-map(n, '{', ':<c-u>call search("^". matchstr(getline("."), "\\(^\\s*\\)") ."\\%<" . line(".") . "l\\S", "be")<cr>', noremap_silent)
-map(n, '}', ':<c-u>call search("^". matchstr(getline("."), "\\(^\\s*\\)") ."\\%>" . line(".") . "l\\S", "e")<cr>', noremap_silent)
+h.nmap('{', ':<c-u>call search("^". matchstr(getline("."), "\\(^\\s*\\)") ."\\%<" . line(".") . "l\\S", "be")<cr>')
+h.nmap('}', ':<c-u>call search("^". matchstr(getline("."), "\\(^\\s*\\)") ."\\%>" . line(".") . "l\\S", "e")<cr>')
 
 -- word searching
-map(n, '<leader>/', '/<c-u>\\<\\><left><left>', noremap)
+h.nmap('<leader>/', '/<c-u>\\<\\><left><left>', noremap)
+
+------------------------------
+-- terminal keymaps
+------------------------------
+-- open terminal in small splited window
+h.nmap('<leader>s', '<cmd>split| wincmd j| resize 15| terminal<cr>')
+
+-- esc hehave as esc
+h.tmap('<esc>', '<c-\\><c-n>')
+
+h.tmap('<c-j>', '<c-\\><c-n><c-w>j')
+h.tmap('<c-k>', '<c-\\><c-n><c-w>k')
+h.tmap('<c-h>', '<c-\\><c-n><c-w>h')
+h.tmap('<c-l>', '<c-\\><c-n><c-w>l')
 
