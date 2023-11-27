@@ -10,9 +10,9 @@ return {
 			require('aerial').setup({
 				placement = 'edge',
 			})
-
-			local map = vim.api.nvim_set_keymap
-			map('n', '<leader>o', '<cmd>AerialToggle!<cr>', {noremap = true, silent = true})
+			local h = require('helpers.map')
+			h.nmap('<leader>o', '<cmd>AerialToggle!<cr>')
 		end,
 	},
 }
+

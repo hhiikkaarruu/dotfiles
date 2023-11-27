@@ -32,7 +32,7 @@ bindkey -e
 
 # bindkey -v # vim keybind
 # auto complete
-autoload -U compinit; compinit
+autoload -Uz compinit; compinit -i
 
 # ?
 zstyle ':completion:*:default' menu select=1
@@ -131,6 +131,7 @@ fi
 # load private zshrc setting
 . ~/.zshrc_local &> /dev/null
 
+# expect package contains unbuffer
 less_with_unbuffer() {
 	unbuffer "$@" |& less -SR
 }
@@ -142,12 +143,16 @@ result_open_neovim() {
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
-alias ub=less_with_unbuffer
+alias ubless=less_with_unbuffer
 alias cdp='cd -P'
 
 # use improve commands if exists
 type rg &> /dev/null \
-	&& export RIPGREP_CONFIG_PATH=~/.ripgreprc
+	&& export RIPGREP_CONFIG_PATH=~/.ripgreprc \
+	&& alias grep='rg'
+type fdfind &> /dev/null \
+	&& alias fd='fdfind' \
+	&& alias find='fdfind'
 type exa &> /dev/null \
 	&& alias ls='exa -F' \
 	&& alias ll='exa -FlBghm -snew --time-style=full-iso' \
@@ -165,6 +170,10 @@ type prettyping &> /dev/null \
 	&& alias ping='prettyping'
 type ncdu &> /dev/null \
 	&& alias du='ncdu --color dark -rr'
+
+# shortcuts
 type trans &> /dev/null \
 	&& alias ej='trans en:ja'
+type aws &> /dev/null \
+	&& alias awslocal='aws --endpoint-url http://localhost:4566'
 

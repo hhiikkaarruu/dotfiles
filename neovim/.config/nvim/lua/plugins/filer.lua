@@ -2,9 +2,6 @@ return {
 	{
 		'nvim-tree/nvim-tree.lua',
 		lazy = false,
-		-- keys = {
-		-- 	{ "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
-		-- },
 		config = function()
 			local var_g = vim.api.nvim_set_var
 			var_g('loaded_netrw', 1)
@@ -13,12 +10,15 @@ return {
 			require('nvim-tree').setup({
 				sort_by = 'case_sensitive',
 				view = {
+					width = '25%',
 					side = 'right',
+					signcolumn = 'no',
 				},
 			})
-			local map = vim.api.nvim_set_keymap
-			map('n', '<leader>t', '<cmd>NvimTreeToggle<cr>', {noremap = true, silent = true})
+			local h = require('helpers.map')
+			h.nmap('<leader>t', '<cmd>NvimTreeToggle<cr>')
 
+			-- close when only nvim-tree buffer
 			vim.api.nvim_create_autocmd("BufEnter", {
 				nested = true,
 				callback = function()
@@ -32,3 +32,4 @@ return {
 		end,
 	},
 }
+

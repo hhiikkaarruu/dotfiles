@@ -1,19 +1,37 @@
+local h = require('helpers.map')
+
 return {
 	{
 		'numToStr/Comment.nvim',
 		lazy = false,
 		config = function()
 			require('Comment').setup()
-			local map = vim.api.nvim_set_keymap
-			map('n', '<leader>c', 'gcc', {})
-			map('v', '<leader>c', 'gc', {})
+			-- h.nmap('<leader>c', 'gcc', {})
+			-- h.vmap('<leader>c', 'gc', {})
+			vim.api.nvim_set_keymap('n', '<leader>c', 'gcc', {})
+			vim.api.nvim_set_keymap('v', '<leader>c', 'gc', {})
 		end,
 	},
 	{
 		'lukas-reineke/indent-blankline.nvim',
 		lazy = false,
 		config = function()
-			require('ibl').setup()
+			local highlight = {
+				'CursorColumn',
+				'Whitespace',
+			}
+			require('ibl').setup({
+				indent = {
+					highlight = highlight,
+					char = '',
+				},
+				whitespace = {
+					highlight = highlight,
+				},
+				scope = {
+					enabled = false,
+				},
+			})
 		end,
 	},
 	{
@@ -21,19 +39,26 @@ return {
 		lazy = false,
 		build = ':TSUpdate',
 		config = function()
-			require('nvim-treesitter.configs').setup {
+			require('nvim-treesitter.configs').setup({
 				ensure_installed = {
 					'lua',
 					'go',
+					'bash',
+					'python',
 				},
-				highlight = {enable = true},
-				indent = {enable = true},
-			}
+				highlight = { enable = true },
+				indent = { enable = true },
+			})
 		end,
 	},
 	{
 		'windwp/nvim-autopairs',
 		event = 'InsertEnter',
-		opts = {},
+		config = function()
+			require('nvim-autopairs').setup()
+
+			h.imap('<c-l>', '<c-g>U<right>')
+		end,
 	},
 }
+
