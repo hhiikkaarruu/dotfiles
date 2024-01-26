@@ -175,5 +175,5 @@ type ncdu &> /dev/null \
 type trans &> /dev/null \
 	&& alias ej='trans en:ja'
 type aws &> /dev/null \
-	&& alias awslocal='aws --endpoint-url http://localhost:4566'
+	&& alias awslocal='aws --endpoint-url http://localhost:8000'
 

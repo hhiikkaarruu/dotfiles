@@ -22,6 +22,7 @@ return {
 					'gopls',
 					'bashls',
 					'pylsp',
+					'tsserver',
 				},
 			})
 			local lspconfig = require('lspconfig')

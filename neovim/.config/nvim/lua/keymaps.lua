@@ -37,6 +37,10 @@ h.nmap('#', '#n')
 -- show full path on <C-g>
 h.nmap('<c-g>', '1<c-g>')
 
+-- disable yank with x and s
+h.nmap('x', '"_x')
+h.nmap('s', '"_s')
+
 
 ------------------------------
 -- tab keymaps
@@ -81,7 +85,7 @@ h.nmap('<c-h>', '<c-w>h')
 h.nmap('<c-l>', '<c-w>l')
 
 ------------------------------
--- useful keymaps
+-- motion keymaps
 ------------------------------
 -- same indent moving
 h.nmap('{', ':<c-u>call search("^". matchstr(getline("."), "\\(^\\s*\\)") ."\\%<" . line(".") . "l\\S", "be")<cr>')
@@ -89,6 +93,16 @@ h.nmap('}', ':<c-u>call search("^". matchstr(getline("."), "\\(^\\s*\\)") ."\\%>
 
 -- word searching
 h.nmap('<leader>/', '/<c-u>\\<\\><left><left>', noremap)
+
+------------------------------
+-- nvimdiff keymaps
+------------------------------
+-- get from local
+h.nmap('<leader>1', ':<c-u>diffget LOCAL<cr>')
+-- get from base
+h.nmap('<leader>2', ':<c-u>diffget BASE<cr>')
+-- get from remote
+h.nmap('<leader>3', ':<c-u>diffget REMOTE<cr>')
 
 ------------------------------
 -- terminal keymaps
