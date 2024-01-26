@@ -45,6 +45,7 @@ return {
 					'go',
 					'bash',
 					'python',
+					'typescript',
 				},
 				highlight = { enable = true },
 				indent = { enable = true },
@@ -57,7 +58,7 @@ return {
 		config = function()
 			require('nvim-autopairs').setup()
 
-			h.imap('<c-l>', '<c-g>U<right>')
+			h.imap('<c-f>', '<c-g>U<right>')
 		end,
 	},
 }
