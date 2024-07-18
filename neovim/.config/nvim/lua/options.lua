@@ -24,6 +24,14 @@ o.showmatch = true
 o.matchtime = 1
 -- disable folding
 o.foldenable = false
+-- show full character with twice size (ex: ※)
+-- comment out because I want to show double size only reference mark
+-- o.ambiwidth = 'double'
+-- instead of above
+-- reference: https://en.wikipedia.org/wiki/List_of_Unicode_characters
+vim.fn.setcellwidths({
+	{0x203b, 0x203b, 2}, -- reference mark
+})
 
 ------------------------------
 -- search settings
@@ -34,6 +42,10 @@ o.ignorecase = true
 o.smartcase = true
 -- do not loop
 o.wrapscan = false
+-- use ripgrep for :grep
+if vim.fn.executable('rg') == 1 then
+	o.grepprg = 'rg --vimgrep'
+end
 
 ------------------------------
 -- editor settings
@@ -53,5 +65,5 @@ o.mouse = ''
 -- ex mode settings
 ------------------------------
 -- make tab completion behavior like bash in ex mode
-o.wildmode = 'list:longest:full'
+o.wildmode = 'list:longest'
 

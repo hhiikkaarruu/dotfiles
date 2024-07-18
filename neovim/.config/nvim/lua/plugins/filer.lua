@@ -43,7 +43,8 @@ return {
 				on_attach = my_on_attach,
 			})
 			local h = require('helpers.map')
-			h.nmap('<leader>t', '<cmd>NvimTreeToggle<cr>')
+			-- h.nmap('<leader>t', '<cmd>NvimTreeToggle<cr>')
+			h.nmap('<leader>t', '<cmd>NvimTreeFindFileToggle<cr>')
 			-- h.nmap('<C-t>', require('nvim-tree.api.tree.change_root_to_parent'), {buffer = bufnr, noremap = true, silent = true, nowait = true})
 
 			-- close when only nvim-tree buffer
@@ -75,4 +76,3 @@ return {
 		end,
 	},
 }
-

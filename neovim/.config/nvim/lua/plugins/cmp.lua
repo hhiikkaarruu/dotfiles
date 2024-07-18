@@ -27,7 +27,7 @@ return {
 				mapping = map.preset.insert({
 					['<c-p>'] = map.select_prev_item(),
 					['<c-n>'] = map.select_next_item(),
-					-- can not map shift space. tbc
+					-- can not map shift space.
 					-- ['<s-space>'] = map.complete(),
 					['<c-k>'] = map.complete(),
 					['<c-e>'] = map.abort(),

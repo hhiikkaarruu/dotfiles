@@ -11,6 +11,7 @@ return {
 			},
 			'neovim/nvim-lspconfig',
 			'hrsh7th/cmp-nvim-lsp',
+			-- 'creativenull/efmls-configs-nvim',
 		},
 		config = function()
 			local autocmd = vim.api.nvim_create_autocmd
@@ -18,11 +19,17 @@ return {
 			local mason_lspconfig = require('mason-lspconfig')
 			mason_lspconfig.setup({
 				ensure_installed = {
-					'lua_ls',
-					'gopls',
-					'bashls',
-					'pylsp',
-					'tsserver',
+					'lua_ls', -- lua language server
+					'gopls', -- go language server
+					'bashls', -- bash language server
+					'pylsp', -- python language server
+					'eslint', -- javascript language server
+					'tsserver', -- typescript language server
+					'groovyls', -- groovy language server
+					-- 'java_language_server', -- java language server -- can not install
+					'jdtls', -- java language server
+
+					-- 'efm',
 				},
 			})
 			local lspconfig = require('lspconfig')
@@ -57,7 +64,7 @@ return {
 					h.nmap('gi', vim.lsp.buf.implementation, opts)
 					h.nmap('gr', vim.lsp.buf.references, opts)
 
-					h.nmap('<C-k>', vim.lsp.buf.signature_help, opts)
+					-- h.nmap('<c-k>', vim.lsp.buf.signature_help, opts)
 					h.nmap('<space>wa', vim.lsp.buf.add_workspace_folder, opts)
 					h.nmap('<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
 					h.nmap('<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
@@ -66,40 +73,95 @@ return {
 					h.nmap('<space>ca', vim.lsp.buf.code_action, opts)
 					h.vmap('<space>ca', vim.lsp.buf.code_action, opts)
 
-					h.nmap('<space>f', function() vim.lsp.buf.format { async = true } end, opts)
+					h.nmap('<space>f', function() vim.lsp.buf.format({ async = true }) end, opts)
 				end,
 			})
+
+			-- ------------------------------
+			-- -- efm-langserver settings
+			-- ------------------------------
+			-- lspconfig.efm.setup({
+			-- 	init_options = {
+			-- 		documentFormatting = true,
+			-- 		documentRangeFormatting = true,
+			-- 	},
+			-- 	settings = {
+			-- 		rootMarkers = {
+			-- 			".git/",
+			-- 		},
+			-- 		languages = {
+			-- 			lua = {
+			-- 				{
+			-- 					formatCommand = "stylua --color Never --config-path ~/.config/.stylua.toml -",
+			-- 					lintIgnoreExitCode = true,
+			-- 				},
+			-- 				{
+			-- 					lintCommand = "luacheck --no-color --quiet --config ~/.config/.luacheckrc -",
+			-- 					lintFormats = { "%f:%l:%c: %m" },
+			-- 					lintIgnoreExitCode = true,
+			-- 				},
+			-- 			},
+			-- 		},
+			-- 	},
+			-- 	filetypes = {
+			-- 		"lua",
+			-- 	},
+			-- })
+
+			-- local languages = require('efmls-configs.defaults').languages()
+			-- lspconfig.efm.setup(vim.tbl_extend('force',
+			-- 	{
+			-- 		filetypes = vim.tbl_keys(languages),
+			-- 		settings = {
+			-- 			rootMarkers = { '.git/' },
+			-- 			languages = languages,
+			-- 		},
+			-- 		init_options = {
+			-- 			documentFormatting = true,
+			-- 			documentRangeFormatting = true,
+			-- 		},
+			-- 	},
+			-- 	{}
+			-- ))
+
+
+			-- comment out because stevearc/conform.nvim will do the following
 			------------------------------
 			-- go settings
 			------------------------------
-			-- auto goimports and gofmt
-			autocmd("BufWritePre", {
-				pattern = "*.go",
+			-- auto goimports
+			autocmd('BufWritePre', {
+				pattern = '*.go',
 				callback = function()
 					local params = vim.lsp.util.make_range_params()
-					params.context = { only = { "source.organizeImports" } }
+					params.context = { only = { 'source.organizeImports' } }
 
 					-- buf_request_sync defaults to a 1000ms timeout. Depending on your
 					-- machine and codebase, you may want longer. Add an additional
 					-- argument after params if you find that you have to write the file
 					-- twice for changes to be saved.
-					-- E.g., vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
-					local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+					-- E.g., vim.lsp.buf_request_sync(0, 'textDocument/codeAction', params, 3000)
+					local result = vim.lsp.buf_request_sync(0, 'textDocument/codeAction', params)
 					for cid, res in pairs(result or {}) do
 						for _, r in pairs(res.result or {}) do
 							if r.edit then
-								local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+								local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or 'utf-16'
 								vim.lsp.util.apply_workspace_edit(r.edit, enc)
 							end
 						end
 					end
+
 					vim.lsp.buf.format({ async = false })
 				end
 			})
-			------------------------------
-			-- python settings
-			------------------------------
+
+			-- -- format on save
+			-- vim.api.nvim_create_autocmd('BufWritePre', {
+			-- 	group = vim.api.nvim_create_augroup('FormatOnSave', {}),
+			-- 	callback = function()
+			-- 		vim.lsp.buf.format({ async = false })
+			-- 	end,
+			-- })
 		end,
 	},
 }
-

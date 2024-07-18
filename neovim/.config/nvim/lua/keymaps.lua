@@ -39,8 +39,23 @@ h.nmap('<c-g>', '1<c-g>')
 
 -- disable yank with x and s
 h.nmap('x', '"_x')
+h.nmap('X', '"_X')
+h.vmap('x', '"_x')
+h.vmap('X', '"_X')
+h.xmap('x', '"_x')
+h.xmap('X', '"_X')
 h.nmap('s', '"_s')
+h.nmap('S', '"_S')
+h.vmap('s', '"_s')
+h.vmap('S', '"_S')
+h.xmap('s', '"_s')
+h.xmap('S', '"_S')
 
+-- disable yank with p in visual mode
+h.vmap('p', 'P')
+h.vmap('P', 'p')
+h.xmap('p', 'P')
+h.xmap('P', 'p')
 
 ------------------------------
 -- tab keymaps
@@ -67,13 +82,8 @@ h.nmap('s', '"_s')
 
 ------------------------------
 -- buffer keymaps
+-- refer to plugins/tabline.lua
 ------------------------------
--- buffer switching
-h.nmap('tl', '<cmd>bnext<cr>')
-h.nmap('th', '<cmd>bprev<cr>')
-
--- quit current buffer
-h.nmap('<leader>q', '<cmd>bprev<cr><cmd>bd#<cr>')
 
 ------------------------------
 -- window keymaps
@@ -85,11 +95,17 @@ h.nmap('<c-h>', '<c-w>h')
 h.nmap('<c-l>', '<c-w>l')
 
 ------------------------------
+-- window keymaps
+------------------------------
+h.nmap('<c-n>', '<cmd>cnext<cr>')
+h.nmap('<c-p>', '<cmd>cprev<cr>')
+
+------------------------------
 -- motion keymaps
 ------------------------------
 -- same indent moving
-h.nmap('{', ':<c-u>call search("^". matchstr(getline("."), "\\(^\\s*\\)") ."\\%<" . line(".") . "l\\S", "be")<cr>')
-h.nmap('}', ':<c-u>call search("^". matchstr(getline("."), "\\(^\\s*\\)") ."\\%>" . line(".") . "l\\S", "e")<cr>')
+h.nmap('{', '<cmd>call search("^". matchstr(getline("."), "\\(^\\s*\\)") ."\\%<" . line(".") . "l\\S", "be")<cr>')
+h.nmap('}', '<cmd>call search("^". matchstr(getline("."), "\\(^\\s*\\)") ."\\%>" . line(".") . "l\\S", "e")<cr>')
 
 -- word searching
 h.nmap('<leader>/', '/<c-u>\\<\\><left><left>', noremap)
@@ -98,11 +114,11 @@ h.nmap('<leader>/', '/<c-u>\\<\\><left><left>', noremap)
 -- nvimdiff keymaps
 ------------------------------
 -- get from local
-h.nmap('<leader>1', ':<c-u>diffget LOCAL<cr>')
+h.nmap('<leader>1', '<cmd>diffget LOCAL<cr>')
 -- get from base
-h.nmap('<leader>2', ':<c-u>diffget BASE<cr>')
+h.nmap('<leader>2', '<cmd>diffget BASE<cr>')
 -- get from remote
-h.nmap('<leader>3', ':<c-u>diffget REMOTE<cr>')
+h.nmap('<leader>3', '<cmd>diffget REMOTE<cr>')
 
 ------------------------------
 -- terminal keymaps

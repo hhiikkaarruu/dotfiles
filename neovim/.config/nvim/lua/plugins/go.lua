@@ -60,8 +60,8 @@ return {
 	-- }
 	{
 		'ray-x/go.nvim',
-		ft = {'go'},
-		event = {'CmdlineEnter'},
+		ft = { 'go', 'gomod' },
+		event = { 'CmdlineEnter' },
 		dependencies = {
 			'ray-x/guihua.lua',
 			'neovim/nvim-lspconfig',
@@ -75,6 +75,5 @@ return {
 			require('go').setup()
 		end,
 		build = ':lua require("go.install").update_all_sync()',
-	}
+	},
 }
-
