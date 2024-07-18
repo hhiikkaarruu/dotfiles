@@ -19,6 +19,18 @@ return {
 					},
 				},
 			})
+			local h = require('helpers.map')
+
+			-- tab switching
+			h.nmap('tl', '<cmd>BufferLineCycleNext<cr>')
+			h.nmap('th', '<cmd>BufferLineCyclePrev<cr>')
+
+			-- tab moving
+			h.nmap('<leader>bn', '<cmd>BufferLineMoveNext<cr>')
+			h.nmap('<leader>bp', '<cmd>BufferLineMovePrev<cr>')
+
+			-- quit current buffer
+			h.nmap('<leader>q', '<cmd>BufferLineCyclePrev<cr><cmd>bd#<cr>')
 		end,
 	},
 }

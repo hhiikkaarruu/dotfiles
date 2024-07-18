@@ -41,11 +41,15 @@ return {
 		config = function()
 			require('nvim-treesitter.configs').setup({
 				ensure_installed = {
+					'vimdoc',
 					'lua',
 					'go',
 					'bash',
 					'python',
 					'typescript',
+					'groovy',
+					'java',
+					'csv',
 				},
 				highlight = { enable = true },
 				indent = { enable = true },
