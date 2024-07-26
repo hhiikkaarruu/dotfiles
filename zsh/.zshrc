@@ -10,6 +10,7 @@ path=(
 	${HOME}/.cargo/bin(N-/)
 	${GOPATH}/bin(N-/)
 	${VOLTA_HOME}/bin(N-/)
+	/opt/homebrew/bin(N-/)
 	/usr/local/bin(N-/)
 	/usr/local/sbin(N-/)
 	/usr/bin(N-/)
@@ -36,6 +37,9 @@ autoload -Uz compinit; compinit -i
 
 # ?
 zstyle ':completion:*:default' menu select=1
+
+# use the same path for sudo
+zstyle ':completion:*:sudo:*' command-path $path
 
 # specify <Tab> bihind
 unsetopt auto_menu
@@ -176,4 +180,8 @@ type trans &> /dev/null \
 	&& alias ej='trans en:ja'
 type aws &> /dev/null \
 	&& alias awslocal='aws --endpoint-url http://localhost:8000'
+
+# for lima
+type limactl %> /dev/null \
+	&& eval "$(limactl completion zsh)"
 

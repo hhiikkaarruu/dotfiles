@@ -2,6 +2,8 @@ return {
 	{
 		'akinsho/bufferline.nvim',
 		lazy = false,
+		-- add following to avoid Segments must be a list error
+		branch = "main",
 		dependencies = {
 			'nvim-tree/nvim-web-devicons',
 		},

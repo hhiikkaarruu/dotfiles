@@ -41,6 +41,14 @@ return {
 					preserve_window_proportions = true,
 				},
 				on_attach = my_on_attach,
+
+				-- for project.nvim
+				sync_root_with_cwd = true,
+				respect_buf_cwd = true,
+				update_focused_file = {
+					enable = true,
+					update_root = true
+				},
 			})
 			local h = require('helpers.map')
 			-- h.nmap('<leader>t', '<cmd>NvimTreeToggle<cr>')
@@ -73,6 +81,21 @@ return {
 			})
 
 			-- require('nvim-tree.api').tree.toggle({focus = false, find_file = true})
+		end,
+	},
+	{
+		'ahmedkhalf/project.nvim',
+		lazy = false,
+		config = function()
+			require("project_nvim").setup({
+				detection_methods = {
+					-- "lsp",
+					"pattern",
+				},
+				patterns = {
+					".git",
+				},
+			})
 		end,
 	},
 }

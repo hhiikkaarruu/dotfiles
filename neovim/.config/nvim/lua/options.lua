@@ -60,6 +60,9 @@ o.hidden = true
 o.formatoptions:remove({ 'r', 'o' })
 -- disable mouse
 o.mouse = ''
+-- also yank to os clipboard
+o.clipboard:append{'unnamedplus'}
+
 
 ------------------------------
 -- ex mode settings
