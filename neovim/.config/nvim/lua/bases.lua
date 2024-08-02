@@ -6,7 +6,7 @@ vim.api.nvim_create_user_command('R', function()
 end, {})
 
 vim.api.nvim_create_user_command('M', function()
-	vim.cmd('e ' .. '~/Notes')
+	vim.cmd('e ' .. '~/notes')
 end, {})
 
 ------------------------------

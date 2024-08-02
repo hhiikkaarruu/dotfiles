@@ -27,6 +27,9 @@ do
 	[ ${f} = 'install.sh' ] && continue
 	[ ${f} = 'uninstall.sh' ] && continue
 
+	# transition to neovim
+	[ ${f} = 'vim' ] && continue
+
 	stow --target ${HOME} ${f}
 done
 

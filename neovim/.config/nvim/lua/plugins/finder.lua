@@ -67,7 +67,7 @@ return {
 			h.nmap('<leader>fh', builtin.help_tags)
 			h.nmap('<leader>fg', telescope.extensions.live_grep_args.live_grep_args)
 			h.nmap('<leader>fc', lga_shortcuts.grep_word_under_cursor)
-			-- h.nmap('<leader>fp', telescope.extensions.projects)
+			h.nmap('<leader>fp', telescope.extensions.projects.projects)
 
 			telescope.load_extension('fzf')
 			telescope.load_extension('live_grep_args')
