@@ -1,4 +1,6 @@
-return {
+local go_plugins = {}
+
+if vim.fn.executable('go') == 1 then
 	-- {
 	-- 	'fatih/vim-go',
 	-- 	ft = 'go',
@@ -58,7 +60,7 @@ return {
 	-- 		h.nmap('<leader>dG', function() dapgo.debug_last_test() end)
 	-- 	end,
 	-- }
-	{
+	table.insert(go_plugins, {
 		'ray-x/go.nvim',
 		ft = { 'go', 'gomod' },
 		event = { 'CmdlineEnter' },
@@ -75,5 +77,7 @@ return {
 			require('go').setup()
 		end,
 		build = ':lua require("go.install").update_all_sync()',
-	},
-}
+	})
+end
+
+return go_plugins
