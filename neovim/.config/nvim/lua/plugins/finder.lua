@@ -1,5 +1,7 @@
-return {
-	{
+local finder_plugins = {}
+
+if vim.fn.executable('make') == 1 then
+	table.insert(finder_plugins, {
 		'nvim-telescope/telescope.nvim',
 		lazy = false,
 		dependencies = {
@@ -73,5 +75,7 @@ return {
 			telescope.load_extension('live_grep_args')
 			telescope.load_extension('projects')
 		end,
-	},
-}
+	})
+end
+
+return finder_plugins
