@@ -18,13 +18,15 @@ return {
 
 			local ls = {
 					'lua_ls', -- lua language server
-					'pylsp', -- python language server
 					-- 'groovyls', -- groovy language server - Installation failed for Package(name=groovy-language-server) error=spawn: bash failed with exit code 1 and signal 0.
 					-- 'java_language_server', -- java language server -- can not install
 					'jdtls', -- java language server
 
 					-- 'efm',
 			}
+			if vim.fn.executable('python3') == 1 then
+				table.insert(ls, 'pylsp') -- python language server
+			end
 			if vim.fn.executable('go') == 1 then
 				table.insert(ls, 'gopls') -- go language server
 			end

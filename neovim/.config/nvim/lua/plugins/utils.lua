@@ -1,6 +1,8 @@
 local h = require('helpers.map')
 
-return {
+local utils_plugins = {}
+
+table.insert(utils_plugins, {
 	{
 		'numToStr/Comment.nvim',
 		lazy = false,
@@ -35,30 +37,6 @@ return {
 		end,
 	},
 	{
-		'nvim-treesitter/nvim-treesitter',
-		lazy = false,
-		build = ':TSUpdate',
-		config = function()
-			require('nvim-treesitter.configs').setup({
-				ensure_installed = {
-					'vimdoc',
-					'lua',
-					'go',
-					'bash',
-					'python',
-					'typescript',
-					'groovy',
-					'java',
-					'csv',
-					'markdown',
-					'markdown_inline',
-				},
-				highlight = { enable = true },
-				indent = { enable = true },
-			})
-		end,
-	},
-	{
 		"m00qek/baleia.nvim",
 		lazy = false,
 		config = function()
@@ -82,5 +60,35 @@ return {
 			h.imap('<c-f>', '<c-g>U<right>')
 		end,
 	},
-}
+})
 
+if vim.fn.executable('gcc') == 1 then
+	table.insert(utils_plugins, {
+		'nvim-treesitter/nvim-treesitter',
+		lazy = false,
+		build = ':TSUpdate',
+		config = function()
+			require('nvim-treesitter.configs').setup({
+				ensure_installed = {
+					'vimdoc',
+					'lua',
+					'go',
+					'bash',
+					'python',
+					'typescript',
+					'groovy',
+					'java',
+					'csv',
+					'markdown',
+					'markdown_inline',
+				},
+				highlight = { enable = true },
+				indent = { enable = true },
+			})
+		end,
+	})
+else
+	print("command not found: gcc")
+end
+
+return utils_plugins
