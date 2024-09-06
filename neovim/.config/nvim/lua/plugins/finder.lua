@@ -76,6 +76,8 @@ if vim.fn.executable('make') == 1 then
 			telescope.load_extension('projects')
 		end,
 	})
+else
+	print("command not found: make")
 end
 
 return finder_plugins

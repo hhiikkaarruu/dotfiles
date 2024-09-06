@@ -78,6 +78,8 @@ if vim.fn.executable('go') == 1 then
 		end,
 		build = ':lua require("go.install").update_all_sync()',
 	})
+else
+	print("command not found: go")
 end
 
 return go_plugins
