@@ -1,8 +1,8 @@
 # path
 # (N-/)
-# 	N:存在しない場合、エラーの代わりに空文字展開
-# 	-:シンボリックリンクの実体を追いかけて判定
-# 	/:ディレクトリ
+# 	N: empty string instead errors if not exists
+# 	-: follow symlink
+# 	/: directory
 path=(
 	${HOME}/bin(N-/)
 	${HOME}/.local/bin(N-/)

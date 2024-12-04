@@ -17,12 +17,12 @@ return {
 			local autocmd = vim.api.nvim_create_autocmd
 
 			local ls = {
-					'lua_ls', -- lua language server
-					-- 'groovyls', -- groovy language server - Installation failed for Package(name=groovy-language-server) error=spawn: bash failed with exit code 1 and signal 0.
-					-- 'java_language_server', -- java language server -- can not install
-					'jdtls', -- java language server
+				'lua_ls', -- lua language server
+				-- 'groovyls', -- groovy language server - Installation failed for Package(name=groovy-language-server) error=spawn: bash failed with exit code 1 and signal 0.
+				-- 'java_language_server', -- java language server -- can not install
+				'jdtls', -- java language server
 
-					-- 'efm',
+				-- 'efm',
 			}
 			if vim.fn.executable('python3') == 1 then
 				table.insert(ls, 'pylsp') -- python language server
@@ -33,7 +33,7 @@ return {
 			if vim.fn.executable('npm') == 1 then
 				table.insert(ls, 'bashls') -- bash language server
 				table.insert(ls, 'eslint') -- javascript language server
-				table.insert(ls, 'tsserver') -- typescript language server
+				table.insert(ls, 'ts_ls') -- typescript language server
 			end
 
 			local mason_lspconfig = require('mason-lspconfig')
@@ -163,13 +163,13 @@ return {
 				end
 			})
 
-			-- -- format on save
-			-- vim.api.nvim_create_autocmd('BufWritePre', {
-			-- 	group = vim.api.nvim_create_augroup('FormatOnSave', {}),
-			-- 	callback = function()
-			-- 		vim.lsp.buf.format({ async = false })
-			-- 	end,
-			-- })
+			-- format on save
+			vim.api.nvim_create_autocmd('BufWritePre', {
+				group = vim.api.nvim_create_augroup('FormatOnSave', {}),
+				callback = function()
+					vim.lsp.buf.format({ async = false })
+				end,
+			})
 		end,
 	},
 }

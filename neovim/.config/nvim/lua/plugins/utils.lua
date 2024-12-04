@@ -40,14 +40,14 @@ table.insert(utils_plugins, {
 		"m00qek/baleia.nvim",
 		lazy = false,
 		config = function()
-			vim.g.baleia = require("baleia").setup({ })
+			vim.g.baleia = require("baleia").setup({})
 
 			-- Command to colorize the current buffer
 			vim.api.nvim_create_user_command("BaleiaColorize", function()
 				vim.g.baleia.once(vim.api.nvim_get_current_buf())
 			end, { bang = true })
 
-			-- Command to show logs 
+			-- Command to show logs
 			vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
 		end,
 	},
@@ -56,6 +56,13 @@ table.insert(utils_plugins, {
 		event = 'InsertEnter',
 		config = function()
 			require('nvim-autopairs').setup()
+
+			-- local npairs = require('nvim-autopairs')
+			-- -- TODO: bs overwrite bullets.vim bs
+			-- npairs.setup({
+			-- 	map_bs = false,
+			-- })
+			-- h.imap('<bs>', npairs.autopairs_bs(), { expr = true, noremap = true, silent = true })
 
 			h.imap('<c-f>', '<c-g>U<right>')
 		end,
